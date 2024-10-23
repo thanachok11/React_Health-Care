@@ -1,0 +1,45 @@
+/* RecentActivityPage.module.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 2rem;
+    color: #2e7d32;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .activityList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .activityItem {
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .activityItem h2 {
+    margin: 0 0 10px;
+  }
+  
+  .activityItem p {
+    margin: 5px 0;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+  }
+  

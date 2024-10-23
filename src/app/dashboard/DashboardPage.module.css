@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #C3E5E4; /* Light green for a calming healthcare background */
+  }
+  
+  .content {
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+    color: #2e7d32; /* Healthcare green */
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .cardLink {
+    text-decoration: none; /* ลบขีดเส้นใต้ลิงก์ */
+    color: inherit; /* ให้สีข้อความไม่เปลี่ยน */
+  }
+  .card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .card h2 {
+    font-size: 1.5rem;
+    color: #2e7d32; /* Healthcare green */
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    font-size: 1rem;
+    color: #4f4f4f;
+  }
+  
+  @media (max-width: 768px) {
+    .cards {
+      grid-template-columns: 1fr;
+    }
+  }
+  

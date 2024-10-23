@@ -1,0 +1,45 @@
+.pageContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #075150; /* สีเขียว */
+    text-align: center;
+  }
+  
+  .historyTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .historyTable th, .historyTable td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+  }
+  
+  .historyTable th {
+    background-color: #075150; /* สีเขียวเข้ม */
+    color: white;
+  }
+  
+  .historyTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .historyTable tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  

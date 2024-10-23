@@ -1,0 +1,101 @@
+/* AppointmentsPage.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  padding: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  color: #2e7d32;
+  margin-bottom: 20px;
+}
+/* สไตล์สำหรับลิสต์ของการนัดหมาย */
+.appointmentList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.appointmentItem {
+  background-color: #f1f1f1;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.appointmentItem p {
+  margin: 5px 0;
+}
+
+/* สไตล์สำหรับปุ่มเพิ่มการนัดหมาย */
+.addButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.addButton:hover {
+  background-color: #45a049;
+}
+
+/* สไตล์สำหรับฟอร์มเพิ่มการนัดหมาย */
+.appointmentForm {
+  margin-top: 20px;
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.appointmentForm div {
+  margin-bottom: 15px;
+}
+
+.appointmentForm label {
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.appointmentForm input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.appointmentForm button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.appointmentForm button:hover {
+  background-color: #45a049;
+}
+
+/* สไตล์สำหรับข้อความแสดงข้อผิดพลาด */
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}

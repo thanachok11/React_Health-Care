@@ -1,0 +1,87 @@
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1abc9c;
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navLinks li {
+  margin-left: 20px;
+}
+
+.link,.loginButton, .registerButton {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+.logoutButton{
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+.specialLink {
+  background-color: #16a085;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.link:hover,.loginButton:hover, .registerButton:hover {
+  background-color: #ffffff;
+  color: #1abc9c;
+}
+.logoutButton:hover{
+  background-color: #e64f4f;
+  color: #000000;
+}
+.userEmail {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-right: 15px;
+}
+
+.logoutButton {
+  background-color: #e74c3c;
+  border: none;
+}
+
+.loginButton, .registerButton {
+  background-color: #3498db;
+}
+
+.loginButton {
+  margin-right: 10px;
+}

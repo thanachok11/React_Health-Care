@@ -1,0 +1,84 @@
+/* Navbar styles */
+.navbar {
+  background-color: #1abc9c; /* สีหลักของ Navbar */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เพิ่มเงาเล็กน้อย */
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.navLinks {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navLinks li {
+  margin-left: 20px;
+}
+
+/* ลิงก์ทั่วไป */
+.link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.link:hover {
+  color: #f4f4f4;
+}
+
+/* ปุ่ม login และ register */
+.login, .register {
+  color: #ffffff;
+  background-color: transparent;
+  border: 2px solid #ffffff;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-weight: bold;
+}
+
+.login:hover, .register:hover {
+  background-color: #ffffff;
+  color: #1abc9c;
+}
+
+.userEmail {
+  color: #ffffff;
+  font-size: 1rem;
+  margin-right: 15px;
+}
+
+.logoutButton {
+  background-color: #f12222;
+  color: #d6e5e2;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #e94747;
+  color: #000000;
+}
