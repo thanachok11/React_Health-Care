@@ -31,11 +31,34 @@
 }
 
 /* ลิงก์ทั่วไป */
-.link {
+.link, .login, .register, .logoutButton {
   color: #ffffff;
   text-decoration: none;
   font-size: 1rem;
-  transition: color 0.3s ease;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  position: relative; /* For pseudo-element positioning */
+  overflow: hidden; /* Hide overflow for sliding underline */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Add pseudo-element for sliding underline effect */
+.link::after, .login::after, .register::after, .logoutButton::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 100%; /* Start from the right side */
+  width: 0%;
+  height: 2px;
+  background-color: #ffffff; /* สีของเส้นขีด */
+  transition: all 0.3s ease;
+}
+
+/* When hover, make the line slide in */
+.link:hover::after, .login:hover::after, .register:hover::after, .logoutButton:hover::after {
+  left: 0; /* Move to the left side */
+  width: 100%; /* Expand width to full */
 }
 
 .link:hover {
@@ -44,17 +67,13 @@
 
 /* ปุ่ม login และ register */
 .login, .register {
-  color: #ffffff;
   background-color: transparent;
   border: 2px solid #ffffff;
   text-decoration: none;
-  padding: 10px 20px;
   font-size: 1.1rem;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  font-weight: bold;
 }
 
+/* สไลด์เอฟเฟกต์เหมือนกัน */
 .login:hover, .register:hover {
   background-color: #ffffff;
   color: #1abc9c;
@@ -70,12 +89,8 @@
   background-color: #f12222;
   color: #d6e5e2;
   border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
   font-size: 1.1rem;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .logoutButton:hover {

@@ -31,7 +31,7 @@
   margin-left: 20px;
 }
 
-.link,.loginButton, .registerButton {
+.link, .loginButton, .registerButton, .logoutButton {
   color: #ffffff;
   text-decoration: none;
   font-size: 1rem;
@@ -39,16 +39,26 @@
   border-radius: 8px;
   transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
+  position: relative; /* Required for pseudo-element positioning */
+  overflow: hidden; /* Hide overflow for sliding underline */
 }
-.logoutButton{
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 1rem;
-  padding: 10px 20px;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  cursor: pointer;
+
+.link::after, .loginButton::after, .registerButton::after, .logoutButton::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 100%; /* Start from the right side */
+  width: 0%;
+  height: 2px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
 }
+
+.link:hover::after, .loginButton:hover::after, .registerButton:hover::after, .logoutButton:hover::after {
+  left: 0; /* Move to the left side */
+  width: 100%; /* Expand width to full */
+}
+
 .specialLink {
   background-color: #16a085;
   display: flex;
@@ -59,14 +69,16 @@
   margin-right: 8px;
 }
 
-.link:hover,.loginButton:hover, .registerButton:hover {
+.link:hover, .loginButton:hover, .registerButton:hover {
   background-color: #ffffff;
   color: #1abc9c;
 }
-.logoutButton:hover{
+
+.logoutButton:hover {
   background-color: #e64f4f;
   color: #000000;
 }
+
 .userEmail {
   color: #ffffff;
   font-size: 1rem;

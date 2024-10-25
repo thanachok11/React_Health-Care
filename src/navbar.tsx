@@ -45,14 +45,14 @@ const Navbar = () => {
         ) : (
           <>
             <li>
-              <Link className={styles.login} href="/login">
+              <a className={styles.login} href="/login">
                 <FontAwesomeIcon icon={faSignInAlt} /> เข้าสู่ระบบ
-              </Link>
+              </a>
             </li>
             <li>
-              <Link className={styles.register} href="/register">
+              <a className={styles.register} href="/register">
                 <FontAwesomeIcon icon={faUserPlus} /> สมัครสมาชิก
-              </Link>
+              </a>
             </li>
           </>
         )}

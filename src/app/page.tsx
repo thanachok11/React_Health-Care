@@ -17,8 +17,7 @@ const HomePage = () => {
             สมัครสมาชิกหรือเข้าสู่ระบบเพื่อเริ่มต้นเส้นทางการดูแลสุขภาพของคุณวันนี้
           </p>
           <div className={styles.ctaButtons}>
-            <button className={styles.signupButton}>สมัครสมาชิก</button>
-            <button className={styles.loginButton}>เข้าสู่ระบบ</button>
+            <button className={styles.loginButton}>เริ่มต้นการทำงาน</button>
           </div>
         </div>
       </div>

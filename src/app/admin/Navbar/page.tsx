@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from './Navbar.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -54,7 +52,7 @@ const Navbar = () => {
             </li>
             <li>
               <button onClick={handleLogout} className={styles.logoutButton}>
-                <FontAwesomeIcon icon={faSignOutAlt} /> ออกจากระบบ
+                ออกจากระบบ
               </button>
             </li>
           </>
