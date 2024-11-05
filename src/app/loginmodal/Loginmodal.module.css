@@ -1,0 +1,135 @@
+/* LoginPage.module.css */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  justify-content: center; /* จัดฟอร์มให้อยู่ตรงกลางในแนวนอน */
+  align-items: center; /* จัดฟอร์มให้อยู่ตรงกลางในแนวตั้ง */
+  flex-grow: 1; /* ให้คอนเทนเนอร์ขยายเต็มพื้นที่ที่เหลือ */
+  background-color: #C3E5E4; /* สีพื้นหลังอ่อนเพื่อความสะอาดตา */
+}
+
+.title {
+  font-family: Arial, sans-serif;
+  color: #2e7d32; /* สีเขียวสุขภาพ */
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  margin-bottom: 180px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.title {
+  font-size: 2rem;
+  color: #2e7d32;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.input:focus {
+  border-color: #2e7d32;
+  outline: none;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center; /* ทำให้ checkbox กับ label อยู่บรรทัดเดียวกัน */
+  margin-bottom: 15px; /* ตั้งค่า margin ให้ตรงกับ input */
+}
+
+.checkboxContainer input[type="checkbox"] {
+  margin-right: 10px; /* เพิ่มระยะห่างระหว่าง checkbox กับ label */
+}
+
+.label {
+  font-size: 1rem;
+  color: #333;
+}
+
+.button {
+  width: 100%;
+  padding: 12px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #1b5e20;
+}
+
+.error {
+  color: #d32f2f; /* สีแดงสด */
+  background-color: #ffebee; /* พื้นหลังสีแดงอ่อน */
+  padding: 10px; /* เพิ่ม padding เพื่อให้ข้อความดูชัดเจน */
+  border-radius: 5px; /* ขอบมน */
+  font-size: 1rem; /* ขนาดตัวอักษร */
+  text-align: center;
+  margin-top: 20px; /* ระยะห่างจากฟอร์ม */
+  border: 1px solid #f44336; /* ขอบสีแดงเข้ม */
+}
+.success {
+  color: green;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+/* LoginPageModal.module.css */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  top: 40px;
+  right: -30px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}

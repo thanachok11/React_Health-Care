@@ -89,6 +89,11 @@ const ProfilePage = () => {
       }
 
       setSuccessMessage('อัพเดทข้อมูลสำเร็จแล้ว!!');
+      setTimeout(() => {
+        {
+          router.push('/dashboard');
+        }
+      }, 2000);
     } catch (err) {
       setError('ไม่สามารถอัปเดตโปรไฟล์ได้');
     }

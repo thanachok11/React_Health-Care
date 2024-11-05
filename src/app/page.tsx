@@ -1,12 +1,20 @@
 "use client";
 
-import Navbar from '@/navbar';  // Import the Navbar component
-import styles from './HomePage.module.css'; // Import the CSS module for styling
+import { useState } from 'react';
+import Navbar from '@/navbar';
+import LoginPageModal from '../app/loginmodal/page'; // Import LoginPageModal component
+import styles from './HomePage.module.css';
 
 const HomePage = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleModalToggle = () => {
+    setIsModalVisible(!isModalVisible);
+  };
+
   return (
     <div className={styles.container}>
-      <Navbar /> {/* Include the Navbar */}
+      <Navbar />
       <div className={styles.hero}>
         <div className={styles.overlay}></div>
         <div className={styles.heroContent}>
@@ -17,10 +25,13 @@ const HomePage = () => {
             สมัครสมาชิกหรือเข้าสู่ระบบเพื่อเริ่มต้นเส้นทางการดูแลสุขภาพของคุณวันนี้
           </p>
           <div className={styles.ctaButtons}>
-            <button className={styles.loginButton}>เริ่มต้นการทำงาน</button>
+            <button className={styles.loginButton} onClick={handleModalToggle}>
+              เริ่มต้นการทำงาน
+            </button>
           </div>
         </div>
       </div>
+      <LoginPageModal isVisible={isModalVisible} onClose={handleModalToggle} />
     </div>
   );
 };
