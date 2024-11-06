@@ -27,7 +27,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 400px;
-  padding: 40px;
+  padding: 40px 40px 40px 20px ;
   margin-bottom: 180px;
   background-color: white;
   border-radius: 10px;
@@ -72,6 +72,7 @@
 .button {
   width: 100%;
   padding: 12px;
+  margin: 10px;
   background-color: #2e7d32;
   color: white;
   border: none;
@@ -89,6 +90,8 @@
   color: #d32f2f; /* สีแดงสด */
   background-color: #ffebee; /* พื้นหลังสีแดงอ่อน */
   padding: 10px; /* เพิ่ม padding เพื่อให้ข้อความดูชัดเจน */
+  margin: 10px;
+  width: 380px;
   border-radius: 5px; /* ขอบมน */
   font-size: 1rem; /* ขนาดตัวอักษร */
   text-align: center;
