@@ -26,8 +26,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 400px;
-  padding: 40px;
+  max-width: 450px;
+  padding: 30px 30px 30px 10px;
   margin-bottom: 180px;
   background-color: white;
   border-radius: 10px;
@@ -42,7 +42,8 @@
 
 .input {
   width: 100%;
-  padding: 12px;
+  padding: 10px 5px;
+  margin: 5px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -57,7 +58,8 @@
 .checkboxContainer {
   display: flex;
   align-items: center; /* ทำให้ checkbox กับ label อยู่บรรทัดเดียวกัน */
-  margin-bottom: 15px; /* ตั้งค่า margin ให้ตรงกับ input */
+  margin: 10px;
+  margin-bottom: 10px;
 }
 
 .checkboxContainer input[type="checkbox"] {
@@ -71,9 +73,10 @@
 
 .button {
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   background-color: #2e7d32;
   color: white;
+  margin: 10px;
   border: none;
   border-radius: 5px;
   font-size: 1rem;
@@ -88,11 +91,12 @@
 .error {
   color: #d32f2f; /* สีแดงสด */
   background-color: #ffebee; /* พื้นหลังสีแดงอ่อน */
-  padding: 10px; /* เพิ่ม padding เพื่อให้ข้อความดูชัดเจน */
+  width: 380px;
+  padding: 10px;
+  margin: 10px;
   border-radius: 5px; /* ขอบมน */
   font-size: 1rem; /* ขนาดตัวอักษร */
   text-align: center;
-  margin-top: 20px; /* ระยะห่างจากฟอร์ม */
   border: 1px solid #f44336; /* ขอบสีแดงเข้ม */
 }
 .success {
@@ -127,7 +131,7 @@
 .closeButton {
   position: absolute;
   top: 40px;
-  right: -30px;
+  right: 0px;
   background: transparent;
   border: none;
   font-size: 20px;
