@@ -1,91 +1,87 @@
 "use client";
+import Link from '../../../../node_modules/next/link'; // Import Link จาก Next.js
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './MedicalHistoryPage.module.css';
+import Navbar from '../Navbar/page'; // Import Navbar
+import styles from './MedicalHistoryPage.module.css'; // Import styles
 
-interface MedicalHistory {
+interface Appointment {
   _id: string;
-  visitDate: string;
+  date: string;
+  time: string;
   doctor: string;
-  diagnosis: string;
-  treatment: string;
-  prescription: string;
+  status: string;
+  userId: string;
 }
 
-const MedicalHistoryPage = () => {
-  const [medicalHistory, setMedicalHistory] = useState<MedicalHistory[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+const AdminAppointmentsPage = () => {
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [loading, setLoading] = useState(true); // สถานะสำหรับการโหลดข้อมูล
+  const [error, setError] = useState(''); // สถานะสำหรับแสดงข้อผิดพลาด
   const router = useRouter();
 
-  // ดึงข้อมูลประวัติการรักษาจาก API
-  const fetchMedicalHistory = async () => {
-    const token = localStorage.getItem('token');
+  // ฟังก์ชันดึงข้อมูลการนัดหมายของทุกผู้ใช้จาก API
+  const fetchAppointments = async () => {
+    const token = localStorage.getItem('token'); // ดึง token จาก localStorage
     if (!token) {
-      router.push('/login'); // ถ้าไม่มี token ให้ไปที่หน้า login
+      router.push('/login'); // ถ้าไม่มี token ให้ไปหน้า login
       return;
     }
 
     try {
-      const res = await fetch('/api/auth/medical-history', {
+      const res = await fetch('/api/auth/admin/appointment', { // API ของ Admin
         headers: {
-          Authorization: `Bearer ${token}`, // ส่ง token เพื่อยืนยันตัวตน
+          Authorization: `Bearer ${token}`, // ส่ง token ไปใน headers
         },
       });
 
       if (!res.ok) {
-        throw new Error('Failed to fetch medical history');
+        throw new Error('Failed to fetch appointments');
       }
 
       const data = await res.json();
-      setMedicalHistory(data.medicalHistory); // เก็บข้อมูลใน state
+      setAppointments(data.appointments);
     } catch (err) {
-      setError('ไม่สามารถดึงข้อมูลประวัติการรักษาได้');
+      setError('ไม่สามารถดึงข้อมูลการนัดหมายได้');
     } finally {
-      setLoading(false); // หยุดโหลดเมื่อดึงข้อมูลเสร็จสิ้น
+      setLoading(false); // หยุดโหลดเมื่อดึงข้อมูลสำเร็จหรือเกิดข้อผิดพลาด
     }
   };
 
   useEffect(() => {
-    fetchMedicalHistory(); // ดึงข้อมูลเมื่อ component mount
+    fetchAppointments(); // เรียกใช้ฟังก์ชันดึงข้อมูลเมื่อ component mount
   }, []);
 
   if (loading) {
-    return <p>กำลังโหลดข้อมูล...</p>;
+    return <p>กำลังโหลดข้อมูล...</p>; // แสดงข้อความระหว่างการโหลด
   }
 
   return (
     <div className={styles.pageContainer}>
-      <h1>ประวัติการรักษาของคุณ</h1>
-      {error && <p className={styles.error}>{error}</p>}
-      {medicalHistory.length > 0 ? (
-        <table className={styles.historyTable}>
-          <thead>
-            <tr>
-              <th>วันที่เข้ารับการรักษา</th>
-              <th>แพทย์ผู้รักษา</th>
-              <th>วินิจฉัย</th>
-              <th>การรักษา</th>
-              <th>ยาที่ได้รับ</th>
-            </tr>
-          </thead>
-          <tbody>
-            {medicalHistory.map((history) => (
-              <tr key={history._id}>
-                <td>{new Date(history.visitDate).toLocaleDateString('th-TH')}</td>
-                <td>{history.doctor}</td>
-                <td>{history.diagnosis}</td>
-                <td>{history.treatment}</td>
-                <td>{history.prescription}</td>
-              </tr>
+      <Navbar /> {/* แสดง Navbar */}
+      <div className={styles.contentContainer}>
+        <h1 className={styles.title}>การนัดหมายทั้งหมด (Admin)</h1>
+        {appointments.length > 0 ? (
+          <ul className={styles.appointmentList}>
+            {appointments.map((appointment, index) => (
+              <li key={index} className={styles.appointmentItem}>
+                <p>วันที่: {appointment.date}</p>
+                <p>เวลา: {appointment.time}</p>
+                <p>แพทย์: {appointment.doctor}</p>
+                <p>สถานะ: {appointment.status}</p>
+                <Link href={`/admin/medical-history/edit/${appointment.userId}`}>
+                <button className={styles.edit}>รายละเอียดคนไข้</button>
+                </Link>
+              </li>
             ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>ไม่มีประวัติการรักษา</p>
-      )}
+          </ul>
+        ) : (
+          <p>ไม่มีการนัดหมาย</p>
+        )}
+        {error && <p className={styles.error}>{error}</p>}
+      </div>
     </div>
   );
 };
 
-export default MedicalHistoryPage;
+export default AdminAppointmentsPage;

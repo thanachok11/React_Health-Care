@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Navbar from '@/navbar'; // Import Navbar
+import Navbar from '../Navbar/page'; // Import Navbar
 import styles from './AdminAppointmentsPage.module.css'; // Import styles
 
 interface Appointment {

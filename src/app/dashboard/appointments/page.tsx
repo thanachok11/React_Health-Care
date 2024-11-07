@@ -173,15 +173,6 @@ const AppointmentsPage = () => {
                 required
               />
             </div>
-            <div>
-              <label>สถานะ:</label>
-              <input
-                type="text"
-                value={newAppointment.status}
-                onChange={(e) => setNewAppointment({ ...newAppointment, status: e.target.value })}
-                required
-              />
-            </div>
             <button type="submit">เพิ่มการนัดหมาย</button>
           </form>
         )}

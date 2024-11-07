@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '../../../../node_modules/next/link';
 import { useEffect, useState } from 'react';
 import styles from './Navbar.module.css';
 
@@ -23,8 +23,8 @@ const Navbar = () => {
 
   return (
     <nav className={styles.navbar}>
-      <Link href="/admin" className={styles.logo}>
-        Balance Care
+      <Link href="/admin" className={styles.link}>
+        <div className={styles.logo}>Balance Care</div>
       </Link>
       <ul className={styles.navLinks}>
         {userEmail ? (

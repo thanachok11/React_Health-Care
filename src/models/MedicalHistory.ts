@@ -20,4 +20,4 @@ const MedicalHistorySchema: Schema = new Schema({
   prescription: { type: String, required: true },
 }, { timestamps: true });
 
-export default mongoose.models.MedicalHistory || mongoose.model<IMedicalHistory>('MedicalHistory', MedicalHistorySchema);
+export default mongoose.models.MedicalHistory || mongoose.model<IMedicalHistory>('MedicalHistories', MedicalHistorySchema);

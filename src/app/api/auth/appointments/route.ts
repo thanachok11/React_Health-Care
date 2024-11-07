@@ -22,7 +22,7 @@ export async function GET(request: Request) {
 
     if (typeof decoded !== 'string' && 'userId' in decoded) {
       // ดึงการนัดหมายของผู้ใช้ที่เข้าสู่ระบบ
-      const appointments = await Appointment.find({ userId: decoded.userId });
+      const appointments = await Appointment.find({ userId: decoded.userId }).select('date time doctor status');
 
       return NextResponse.json({ appointments }, { status: 200 });
     } else {
@@ -45,15 +45,16 @@ export async function POST(request: Request) {
     const body = await request.json(); // รับข้อมูลการนัดหมายจาก request body
     await connectMongo(); // เชื่อมต่อกับ MongoDB
 
-    if (typeof decoded !== 'string' && 'userId' in decoded) {
-      // สร้างการนัดหมายใหม่
+    if (typeof decoded !== 'string' && 'userId' in decoded ) {
+      // สร้างการนัดหมายใหม่พร้อมสถานะ
       const newAppointment = new Appointment({
-        userId: decoded.userId,  // เชื่อมการนัดหมายกับผู้ใช้ที่เข้าสู่ระบบ
+        userId: decoded.userId, // เชื่อมการนัดหมายกับผู้ใช้ที่เข้าสู่ระบบ
         date: body.date,
         time: body.time,
         doctor: body.doctor,
-        status: body.status,
+        status: body.status || 'รอการยืนยันจากแพทย์', // ตั้งสถานะเริ่มต้นเป็น 'pending' หากไม่ระบุ
       });
+      
 
       await newAppointment.save();
 
@@ -79,10 +80,10 @@ export async function PUT(request: Request) {
     await connectMongo(); // เชื่อมต่อกับ MongoDB
 
     if (typeof decoded !== 'string' && 'userId' in decoded) {
-      // อัปเดตการนัดหมายที่เชื่อมกับผู้ใช้ที่เข้าสู่ระบบ
+      // อัปเดตการนัดหมายรวมถึงสถานะ
       const updatedAppointment = await Appointment.findOneAndUpdate(
-        { _id: body.appointmentId, userId: decoded.userId },  // ตรวจสอบให้แน่ใจว่าเป็นการนัดหมายของผู้ใช้คนนั้น
-        { date: body.date, time: body.time, doctor: body.doctor, status: body.status },
+        { _id: body.appointmentId, userId: decoded.userId }, // ตรวจสอบให้แน่ใจว่าเป็นการนัดหมายของผู้ใช้คนนั้น
+        { date: body.date, time: body.time, doctor: body.doctor, status: body.status || 'pending' },
         { new: true }
       );
 
@@ -114,7 +115,7 @@ export async function DELETE(request: Request) {
     if (typeof decoded !== 'string' && 'userId' in decoded) {
       const appointment = await Appointment.findOneAndDelete({
         _id: body.appointmentId,
-        userId: decoded.userId,  // ลบการนัดหมายที่เป็นของผู้ใช้นั้น
+        userId: decoded.userId, // ลบการนัดหมายที่เป็นของผู้ใช้นั้น
       });
 
       if (!appointment) {
