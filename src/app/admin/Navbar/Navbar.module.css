@@ -1,8 +1,9 @@
 /* Navbar styles */
 .navbar {
-  background-color: #7c9590; /* สีหลักของ Navbar */
+  background-color: #1abc9c; /* สีหลักของ Navbar */
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 20px;
   position: sticky;
   top: 0;
@@ -78,29 +79,17 @@
   color: #1abc9c;
 }
 
-/* สไตล์สำหรับไอคอนของผู้ใช้งาน */
-.userSection {
-  display: flex;
-  align-items: center;
-  margin-left: auto; /* จัดตำแหน่งให้ไปที่ขวาสุด */
-}
-
-.userIcon {
-  margin-right: 8px; /* เว้นระยะระหว่างไอคอนกับข้อความ */
-  color: #ffffff; /* สีไอคอน */
-}
-
 .userEmail {
-  font-size: 16px;
-  color: rgb(255, 255, 255);
+  color: #ffffff;
+  font-size: 1rem;
+  margin-right: 15px;
 }
-
 
 .logoutButton {
   background-color: #f12222;
   color: #d6e5e2;
   border: none;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
 }
 

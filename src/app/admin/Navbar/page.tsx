@@ -1,6 +1,5 @@
 import Link from '../../../../node_modules/next/link';
 import { useEffect, useState } from 'react';
-import { FaUserCircle } from 'react-icons/fa'; // เพิ่มไอคอนผู้ใช้งาน
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
@@ -48,11 +47,6 @@ const Navbar = () => {
                 กิจกรรมล่าสุด
               </Link>
             </li>
-            <li className={styles.userSection}>
-              <Link href="/admin/user" className={`${styles.link} ${styles.specialLink}`}>
-                <FaUserCircle size={24} className={styles.userIcon} />
-              </Link>
-              </li>
             <li>
               <span className={styles.userEmail}>สวัสดีคุณ {userEmail}</span>
             </li>
