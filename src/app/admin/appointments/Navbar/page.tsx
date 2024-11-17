@@ -1,7 +1,6 @@
-import Link from '../../../../node_modules/next/link';
+import Link from '../../../../../node_modules/next/link';
 import { useEffect, useState } from 'react';
-import { FaUserCircle } from 'react-icons/fa'; // เพิ่มไอคอนผู้ใช้งาน
-import styles from './Navbar.module.css';
+import styles from '../Navbar/Navbar.module.css';
 
 const Navbar = () => {
   const [userEmail, setUserEmail] = useState<string | null>(null);
@@ -31,28 +30,17 @@ const Navbar = () => {
         {userEmail ? (
           <>
             <li>
-              <Link href="/admin/medical-history" className={`${styles.link} ${styles.specialLink}`}>
-                <span className={styles.icon}>🩺</span>
-                ประวัติการรักษา
-              </Link>
-            </li>
-            <li>
               <Link href="/admin/appointments" className={`${styles.link} ${styles.specialLink}`}>
                 <span className={styles.icon}>📅</span>
-                การนัดหมาย
+                รายการนัดหมาย
               </Link>
             </li>
             <li>
-              <Link href="/admin/recent-activities" className={`${styles.link} ${styles.specialLink}`}>
+              <Link href="/admin/appointments/history" className={`${styles.link} ${styles.specialLink}`}>
                 <span className={styles.icon}>📝</span>
-                กิจกรรมล่าสุด
+                ประวัติการนัดหมาย
               </Link>
             </li>
-            <li className={styles.userSection}>
-              <Link href="/admin/user" className={`${styles.link} ${styles.specialLink}`}>
-                <FaUserCircle size={24} className={styles.userIcon} />
-              </Link>
-              </li>
             <li>
               <span className={styles.userEmail}>สวัสดีคุณ {userEmail}</span>
             </li>

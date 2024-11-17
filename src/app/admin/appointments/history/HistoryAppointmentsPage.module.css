@@ -3,7 +3,6 @@
 .container {
   padding: 20px;
   max-width: 1200px;
-  align-items: center;
   margin: 0 auto;
   font-family: Arial, sans-serif;
 }
@@ -84,56 +83,10 @@
   /* Loading message */
   .loading {
     font-size: 1.2rem;
-    color: #7c9590;
+    color: #3498db;
     text-align: center;
   }
-  /* ปุ่มยืนยัน */
-.confirm {
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
-  margin-right: 10px;
-  border-radius: 5px;
-  background-color: #4caf50; /* สีเขียว */
-  color: white;
-  transition: background-color 0.3s ease, opacity 0.3s ease;
-}
-
-.confirm:hover {
-  background-color: #45a049; /* สีเขียวเข้มเมื่อ hover */
-}
-
-/* ปุ่มยกเลิก */
-.cancel {
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
-  border-radius: 5px;
-  background-color: #f44336; /* สีแดง */
-  color: white;
-  transition: background-color 0.3s ease, opacity 0.3s ease;
-}
-
-.cancel:hover {
-  background-color: #e53935; /* สีแดงเข้มเมื่อ hover */
-}
-
-/* ปุ่มที่ disabled */
-.confirm:disabled, .cancel:disabled {
-  cursor: not-allowed; /* เปลี่ยน cursor เมื่อปุ่ม disabled */
-  opacity: 0.6; /* ทำให้ปุ่มจางลง */
-}
-
-.confirm:disabled {
-  background-color: #81c784; /* สีเขียวจางสำหรับปุ่ม disabled */
-}
-
-.cancel:disabled {
-  background-color: #ef9a9a; /* สีแดงจางสำหรับปุ่ม disabled */
-}
-
+  
   /* Media queries for responsive design */
   @media (max-width: 768px) {
     .contentContainer {
