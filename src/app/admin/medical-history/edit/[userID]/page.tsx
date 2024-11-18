@@ -1,103 +1,80 @@
 "use client";
+import { useRouter, useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import Navbar from '../../../Navbar/page'; // Import Navbar
+import styles from './PatientDetailPage.module.css'; // Import styles
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import styles from './EditHistoryPage.module.css'; // ไฟล์ CSS สำหรับจัดแต่งหน้า
+interface PatientDetail {
+  name: string;
+  age: number;
+  gender: string;
+  medicalHistory: string; // ประวัติการรักษา
+  contactInfo: string;    // ข้อมูลการติดต่อ
+}
 
-const AddMedicalHistoryPage = ({ params }: { params: { userID: string } }) => {
-  const [formData, setFormData] = useState({
-    visitDate: '',
-    doctor: '',
-    diagnosis: '',
-    treatment: '',
-    prescription: '',
-  });
-  const [error, setError] = useState('');
+const PatientDetailPage = () => {
+  const { userId } = useParams(); // รับค่า userId จาก URL
+  const [patient, setPatient] = useState<PatientDetail | null>(null);
+  const [loading, setLoading] = useState(true); // สถานะสำหรับการโหลดข้อมูล
+  const [error, setError] = useState(''); // สถานะสำหรับแสดงข้อผิดพลาด
   const router = useRouter();
 
-  // ฟังก์ชันสำหรับจัดการการเปลี่ยนแปลงในฟอร์ม
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  // ฟังก์ชันสำหรับการส่งข้อมูล
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // ฟังก์ชันดึงข้อมูลรายละเอียดคนไข้จาก API
+  const fetchPatientDetail = async () => {
+    const token = localStorage.getItem('token'); // ดึง token จาก localStorage
+    if (!token) {
+      router.push('/login'); // ถ้าไม่มี token ให้ไปหน้า login
+      return;
+    }
 
     try {
-      const res = await fetch(`/api/auth/admin/medical-history/userID/${params.userID}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      const res = await fetch(`/api/auth/admin/medical-history/PatientDetail/${userId}`, { // ดึงข้อมูลจาก API โดยใช้ userId
+        headers: {
+          Authorization: `Bearer ${token}`, // ส่ง token ไปใน headers
+        },
       });
 
-      if (res.ok) {
-        alert('เพิ่มข้อมูลประวัติการรักษาสำเร็จ');
-        router.push(`/admin/medical-history/${params.userID}`); // กลับไปที่หน้าประวัติการรักษา
-      } else {
-        const errorData = await res.json();
-        setError(errorData.message || 'ไม่สามารถเพิ่มข้อมูลได้');
+      if (!res.ok) {
+        throw new Error('Failed to fetch patient detail');
       }
+
+      const data = await res.json();
+      setPatient(data.patient);
     } catch (err) {
-      setError('เกิดข้อผิดพลาดในการเพิ่มข้อมูล');
+      setError('ไม่สามารถดึงข้อมูลรายละเอียดคนไข้ได้');
+    } finally {
+      setLoading(false); // หยุดโหลดเมื่อดึงข้อมูลสำเร็จหรือเกิดข้อผิดพลาด
     }
   };
 
+  useEffect(() => {
+    fetchPatientDetail(); // เรียกใช้ฟังก์ชันดึงข้อมูลเมื่อ component mount
+  }, [userId]);
+
+  if (loading) {
+    return <p>กำลังโหลดข้อมูล...</p>; // แสดงข้อความระหว่างการโหลด
+  }
+
   return (
-    <div className={styles.container}>
-      <h1>เพิ่มประวัติการรักษา</h1>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <label>วันที่เข้ารับการรักษา</label>
-        <input
-          type="date"
-          name="visitDate"
-          value={formData.visitDate}
-          onChange={handleChange}
-          required
-        />
-
-        <label>แพทย์ผู้รักษา</label>
-        <input
-          type="text"
-          name="doctor"
-          value={formData.doctor}
-          onChange={handleChange}
-          placeholder="ชื่อแพทย์"
-          required
-        />
-
-        <label>การวินิจฉัย</label>
-        <textarea
-          name="diagnosis"
-          value={formData.diagnosis}
-          onChange={handleChange}
-          placeholder="ผลการวินิจฉัย"
-          required
-        />
-
-        <label>การรักษา</label>
-        <textarea
-          name="treatment"
-          value={formData.treatment}
-          onChange={handleChange}
-          placeholder="รายละเอียดการรักษา"
-          required
-        />
-
-        <label>ยาที่ได้รับ</label>
-        <textarea
-          name="prescription"
-          value={formData.prescription}
-          onChange={handleChange}
-          placeholder="ยาที่จ่ายให้ผู้ป่วย"
-          required
-        />
-
-        <button type="submit" className={styles.button}>บันทึกข้อมูล</button>
+    <div className={styles.pageContainer}>
+      <Navbar /> {/* แสดง Navbar */}
+      <div className={styles.contentContainer}>
+        <h1 className={styles.title}>รายละเอียดคนไข้</h1>
+        {patient ? (
+          <div className={styles.patientDetail}>
+            <p>ชื่อ: {patient.name}</p>
+            <p>อายุ: {patient.age}</p>
+            <p>เพศ: {patient.gender}</p>
+            <p>ประวัติการรักษา: {patient.medicalHistory}</p>
+            <p>ข้อมูลการติดต่อ: {patient.contactInfo}</p>
+          </div>
+        ) : (
+          <p>ไม่พบข้อมูลคนไข้</p>
+        )}
         {error && <p className={styles.error}>{error}</p>}
-      </form>
+      </div>
     </div>
   );
 };
 
-export default AddMedicalHistoryPage;
+export default PatientDetailPage;

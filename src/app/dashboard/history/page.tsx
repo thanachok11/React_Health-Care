@@ -21,7 +21,7 @@ const HistoryPage = () => {
     // ดึงข้อมูลประวัติจาก API
     const fetchHistory = async () => {
       try {
-        const res = await fetch('/api/auth/medical-history');  // API สำหรับดึงข้อมูลประวัติ
+        const res = await fetch('/api/auth/history');  // API สำหรับดึงข้อมูลประวัติ
         if (!res.ok) {
           throw new Error('Failed to fetch history');
         }

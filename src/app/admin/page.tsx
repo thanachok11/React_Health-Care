@@ -1,160 +1,130 @@
 "use client";
-import Link from 'next/link'; // Import Link จาก Next.js
 import { useState, useEffect } from 'react';
-import Navbar from './Navbar/page'; // Import Navbar
-import styles from './AdminPage.module.css'; // Import CSS สำหรับหน้า Admin Page
+import { Bar } from 'react-chartjs-2';
+import Navbar from './Navbar/page';
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import styles from './AdminPage.module.css'; // Import CSS module
 
-interface User {
-  id: string;
-  email: string;
-  username: string;
-  firstName: string;
-  lastName: string;
-}
+// Register Chart.js components
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-const AdminPage = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [newUser, setNewUser] = useState({
-    email: '',
-    username: '',
-    firstName: '',
-    lastName: '',
-    password: ''
-  });
-  const [showForm, setShowForm] = useState(false); // สำหรับเปิด/ปิดฟอร์มเพิ่มผู้ใช้งาน
+const Dashboard = () => {
+  const [userCount, setUserCount] = useState<number | null>(null);
+  const [appointmentCount, setAppointmentCount] = useState<number | null>(null);
+  const [userData, setUserData] = useState<any>(null); // State สำหรับข้อมูลกราฟผู้ใช้
+  const [appointmentData, setAppointmentData] = useState<any>(null); // State สำหรับข้อมูลกราฟการนัดหมาย
 
+  // ดึงข้อมูลจาก API ที่เราเพิ่งสร้างขึ้น
   useEffect(() => {
-    // ฟังก์ชันดึงข้อมูลผู้ใช้ทั้งหมดจาก API
-    const fetchUsers = async () => {
+    const fetchStats = async () => {
       try {
-        const res = await fetch('/api/auth/admin');  // URL API สำหรับดึงข้อมูลผู้ใช้ทั้งหมด
-        if (!res.ok) {
-          throw new Error('Failed to fetch users');
+        const response = await fetch('/api/auth/admin/home');
+        const data = await response.json();
+
+        if (data.success) {
+          setUserCount(data.data.userCount);
+          setAppointmentCount(data.data.appointmentCount);
+
+          // ตั้งค่าข้อมูลกราฟ
+          setUserData({
+            labels: data.data.months,
+            datasets: [
+              {
+                label: 'จำนวนผู้ใช้',
+                data: data.data.userCounts,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+              },
+            ],
+          });
+
+          setAppointmentData({
+            labels: data.data.months,
+            datasets: [
+              {
+                label: 'จำนวนการนัดหมาย',
+                data: data.data.appointmentCounts,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+              },
+            ],
+          });
+        } else {
+          console.error('ไม่สามารถดึงข้อมูลได้');
         }
-        const data = await res.json();
-        setUsers(data.users);  // เก็บข้อมูลผู้ใช้ใน state
-        setLoading(false);
-      } catch (err) {
-        setError('ไม่สามารถดึงข้อมูลผู้ใช้ได้');
-        setLoading(false);
+      } catch (error) {
+        console.error('เกิดข้อผิดพลาด:', error);
       }
     };
 
-    fetchUsers();
+    fetchStats();
   }, []);
-
-  // ฟังก์ชันจัดการฟิลด์การกรอกข้อมูลผู้ใช้ใหม่
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewUser({ ...newUser, [e.target.name]: e.target.value });
-  };
-
-  // ฟังก์ชันเพิ่มผู้ใช้ใหม่
-  const handleAddUser = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch('/api/auth/admin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newUser)
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        setUsers([...users, data.user]);  // เพิ่มผู้ใช้ใหม่ใน state
-        setNewUser({ email: '', username: '', firstName: '', lastName: '', password: '' });
-        setShowForm(false); // ปิดฟอร์มหลังเพิ่มผู้ใช้งานสำเร็จ
-      } else {
-        setError('ไม่สามารถเพิ่มผู้ใช้ได้');
-      }
-    } catch (err) {
-      setError('เกิดข้อผิดพลาดในการเพิ่มผู้ใช้');
-    }
-  };
 
   return (
     <div className={styles.container}>
       <Navbar />
-      <div className={styles.content}>
-        <h1 className={styles.title}>จัดการผู้ใช้งาน</h1>
-        <div className={styles.actions}>
-          <button 
-            className={styles.addButton}
-            onClick={() => setShowForm(!showForm)}  // Toggle ฟอร์ม
-          >
-            {showForm ? "ปิดฟอร์ม" : "เพิ่มผู้ใช้งาน"}
-          </button>
+      <h1 className={styles.title}>แดชบอร์ด </h1>
+      <div className={styles.statsContainer}>
+        <h2>ข้อมูลสถิติ</h2>
+        <div className={styles.statItem}>
+          <strong>จำนวนผู้ใช้: </strong> 
+          {userCount !== null ? userCount : 'กำลังโหลด...'} คน
         </div>
-        
-        {showForm && (
-          <form onSubmit={handleAddUser} className={styles.form}>
-            <input
-              type="email"
-              name="email"
-              placeholder="อีเมล"
-              value={newUser.email}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
-              name="username"
-              placeholder="ชื่อผู้ใช้"
-              value={newUser.username}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
-              name="firstName"
-              placeholder="ชื่อ"
-              value={newUser.firstName}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="text"
-              name="lastName"
-              placeholder="นามสกุล"
-              value={newUser.lastName}
-              onChange={handleChange}
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="รหัสผ่าน"
-              value={newUser.password}
-              onChange={handleChange}
-              required
-            />
-            <button type="submit" className={styles.submitButton}>บันทึก</button>
-          </form>
-        )}
+        <div className={styles.statItem}>
+          <strong>จำนวนการนัดหมาย: </strong>
+          {appointmentCount !== null ? appointmentCount : 'กำลังโหลด...'} รายการ
+        </div>
+      </div>
 
-        {loading ? (
-          <p>กำลังโหลดข้อมูล...</p>
-        ) : error ? (
-          <p className={styles.error}>{error}</p>
+      <div className={styles.graphContainer}>
+        <h3 className={styles.graphTitle}>กราฟจำนวนผู้ใช้แยกตามเดือน</h3>
+        {userData ? (
+          <Bar data={userData} options={{
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+              },
+              tooltip: {
+                callbacks: {
+                  label: (tooltipItem) => {
+                    return `${tooltipItem.raw} ผู้ใช้`;
+                  },
+                },
+              },
+            },
+          }} />
         ) : (
-          <div className={styles.userGrid}>
-            {users.map((user) => (
-              <div key={user.id} className={styles.userCard}>
-                <h3>{user.username}</h3>
-                <p>อีเมล: {user.email}</p>
-                <p>ชื่อ: {user.firstName} {user.lastName}</p>
-                <Link href={`/admin/edit/${user.username}`}>
-                  <button className={styles.editButton}>แก้ไขข้อมูลผู้ใช้</button>
-                </Link>
-              </div>
-            ))}
-          </div>
+          <div className={styles.loader}>กำลังโหลดกราฟ...</div>
+        )}
+      </div>
+
+      <div className={styles.graphContainer}>
+        <h3 className={styles.graphTitle}>กราฟจำนวนการนัดหมายแยกตามเดือน</h3>
+        {appointmentData ? (
+          <Bar data={appointmentData} options={{
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+              },
+              tooltip: {
+                callbacks: {
+                  label: (tooltipItem) => {
+                    return `${tooltipItem.raw} การนัดหมาย`;
+                  },
+                },
+              },
+            },
+          }} />
+        ) : (
+          <div className={styles.loader}>กำลังโหลดกราฟ...</div>
         )}
       </div>
     </div>
   );
 };
 
-export default AdminPage;
+export default Dashboard;

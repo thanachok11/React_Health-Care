@@ -90,9 +90,7 @@ const ProfilePage = () => {
 
       setSuccessMessage('อัพเดทข้อมูลสำเร็จแล้ว!!');
       setTimeout(() => {
-        {
-          router.push('/dashboard');
-        }
+        router.push('/dashboard');
       }, 2000);
     } catch (err) {
       setError('ไม่สามารถอัปเดตโปรไฟล์ได้');
@@ -100,7 +98,7 @@ const ProfilePage = () => {
   };
 
   if (loading) {
-    return <p>กำลังโหลดข้อมูล...</p>;
+    return <p className={styles.loading}>กำลังโหลดข้อมูล...</p>;
   }
 
   return (
@@ -119,6 +117,7 @@ const ProfilePage = () => {
                 onChange={handleChange}
                 className={styles.input}
                 required
+                disabled // ทำให้ไม่สามารถแก้ไขได้และจะไม่ถูกส่งไปในฟอร์ม
               />
             </div>
             <div className={styles.inputGroup}>

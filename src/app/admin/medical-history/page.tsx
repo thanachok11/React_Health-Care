@@ -29,7 +29,7 @@ const AdminAppointmentsPage = () => {
     }
 
     try {
-      const res = await fetch('/api/auth/admin/appointment', { // API ของ Admin
+      const res = await fetch('/api/auth/admin/medical-history', { // API ของ Admin
         headers: {
           Authorization: `Bearer ${token}`, // ส่ง token ไปใน headers
         },
@@ -60,7 +60,7 @@ const AdminAppointmentsPage = () => {
     <div className={styles.pageContainer}>
       <Navbar /> {/* แสดง Navbar */}
       <div className={styles.contentContainer}>
-        <h1 className={styles.title}>การนัดหมายทั้งหมด (Admin)</h1>
+        <h1 className={styles.title}>ประวัติการรักษา (Admin)</h1>
         {appointments.length > 0 ? (
           <ul className={styles.appointmentList}>
             {appointments.map((appointment, index) => (

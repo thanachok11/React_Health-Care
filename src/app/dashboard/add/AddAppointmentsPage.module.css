@@ -1,0 +1,145 @@
+
+  /* Content styling */
+  .contentContainer {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    position: sticky;
+    padding: 30px;
+    width: 100%;
+    max-width: 1100px;
+    margin-left: 50px;
+  }
+  
+  /* Title styling */
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #7c9590;
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 20px;
+  }
+  .form {
+    background-color: #f4f9fb;  /* Light blue-gray background for a clean feel */
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  /* Soft shadow for depth */
+    margin-bottom: 40px;
+  }
+  
+  .form div {
+    margin-bottom: 15px;
+  }
+  
+  .form label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form input,
+  .form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  
+  .submit {
+    display: inline-block;
+    margin-top: 20px;
+    margin: 20px;
+    padding: 10px 15px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border: none;
+    color: #ffffff; /* White text */
+    background-color: #0056b3; /* Green background */
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .form button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Slight zoom effect */
+  }
+  .form button:active {
+    background-color: #0056b3; /* Even darker green when clicked */
+    transform: scale(0.98); /* Slight shrink effect */
+  }
+  .form a {
+    display: inline-block;
+    padding: 10px 15px;
+    margin-right: 30px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #ffffff; /* White text */
+    background-color: #4caf50; /* Green background */
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .form a:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+  }
+  
+  .form a:active {
+    background-color: #3e8e41; /* Even darker green when clicked */
+    transform: scale(0.98); /* Slight shrink effect */
+  }
+  
+  /* Loading message */
+  .loading {
+    font-size: 1.2rem;
+    color: #7c9590;
+    text-align: center;
+  }
+  .successPopup {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .successIcon {
+    margin-right: 10px;
+    font-size: 20px;
+  }
+  
+  .successPopup p {
+    margin: 0;
+  }
+  
+  /* Media queries for responsive design */
+  @media (max-width: 768px) {
+    .contentContainer {
+      width: 95%;
+      padding: 20px;
+    }
+  
+    .title {
+      font-size: 1.6rem;
+    }
+  
+    .appointmentItem {
+      padding: 10px;
+    }
+  }
+  
