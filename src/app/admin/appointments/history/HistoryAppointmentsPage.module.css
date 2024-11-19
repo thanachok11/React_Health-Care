@@ -1,24 +1,28 @@
 
-/* กำหนดพื้นฐานให้กับทั้งหน้า */
-.container {
-  padding: 20px;
-  max-width: 1200px;
-  align-items: center;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
+.body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
-  /* Content styling */
-  .contentContainer {
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    position: sticky;
-    padding: 30px;
-    width: 100%;
-    max-width: 1100px;
-    margin-top: 20px;
-    margin-left: 50px;
-  }
+.pageContainer{
+  background: linear-gradient(135deg, #eaf6f5, #c3e5e4);
+
+}
+/* Content Container */
+.contentContainer {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%;
+  max-width: 1750px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
   
   /* Title styling */
   .title {
@@ -27,8 +31,12 @@
     color: #7c9590;
     text-align: center;
     margin-bottom: 20px;
+  }  
+  .title2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #7c9590;
   }
-  
   /* Appointment list styling */
   .appointmentList {
     list-style: none;
@@ -51,6 +59,11 @@
     font-size: 1rem;
     
   }
+ 
+  /* Hover effect for appointment items */
+  .appointmentItem:hover {
+    background-color: #d1e8f2;
+  }
   .edit {
     display: inline-block;
     padding: 8px 15px;
@@ -68,11 +81,6 @@
   .edit:hover {
     background-color: #16a085;
   }
-  /* Hover effect for appointment items */
-  .appointmentItem:hover {
-    background-color: #d1e8f2;
-  }
-  
   /* Error message styling */
   .error {
     color: #e74c3c;
@@ -81,57 +89,35 @@
     margin-top: 20px;
   }
   
+.statusCancelled {
+  border-left: 4px solid red;
+}
+
+.statusConfirmed {
+  border-left: 4px solid green;
+}
+
   /* Loading message */
   .loading {
     font-size: 1.2rem;
     color: #7c9590;
     text-align: center;
   }
-  /* ปุ่มยืนยัน */
-.confirm {
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
-  margin-right: 10px;
-  border-radius: 5px;
-  background-color: #4caf50; /* สีเขียว */
-  color: white;
-  transition: background-color 0.3s ease, opacity 0.3s ease;
+
+.searchInput {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin: 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
 }
 
-.confirm:hover {
-  background-color: #45a049; /* สีเขียวเข้มเมื่อ hover */
-}
-
-/* ปุ่มยกเลิก */
-.cancel {
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  font-size: 12px;
-  border-radius: 5px;
-  background-color: #f44336; /* สีแดง */
-  color: white;
-  transition: background-color 0.3s ease, opacity 0.3s ease;
-}
-
-.cancel:hover {
-  background-color: #e53935; /* สีแดงเข้มเมื่อ hover */
-}
-
-/* ปุ่มที่ disabled */
-.confirm:disabled, .cancel:disabled {
-  cursor: not-allowed; /* เปลี่ยน cursor เมื่อปุ่ม disabled */
-  opacity: 0.6; /* ทำให้ปุ่มจางลง */
-}
-
-.confirm:disabled {
-  background-color: #81c784; /* สีเขียวจางสำหรับปุ่ม disabled */
-}
-
-.cancel:disabled {
-  background-color: #ef9a9a; /* สีแดงจางสำหรับปุ่ม disabled */
+.searchInput:focus {
+  border-color: #4b9de0;
+  outline: none;
 }
 
   /* Media queries for responsive design */

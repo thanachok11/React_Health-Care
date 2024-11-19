@@ -146,7 +146,7 @@ const AdminPage = () => {
                 <p>อีเมล: {user.email}</p>
                 <p>ชื่อ: {user.firstName} {user.lastName}</p>
                 <Link href={`/admin/edit/${user.username}`}>
-                  <button className={styles.editButton}>แก้ไขข้อมูลผู้ใช้</button>
+                  <button className={styles.editButton}>รายละเอียดผู้ใช้งาน</button>
                 </Link>
               </div>
             ))}

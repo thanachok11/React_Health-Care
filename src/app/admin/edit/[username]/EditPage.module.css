@@ -1,79 +1,106 @@
 /* Container หลักของหน้า */
 .container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  
-  /* Content */
-  .content {
-    padding: 20px;
-  }
-  
-  /* Title สำหรับหัวข้อ */
-  .title {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #7c9590;
-  }
-  
-  /* ฟอร์มแก้ไขผู้ใช้ */
-  .form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  /* สไตล์ input field */
-  .form input {
-    margin-bottom: 10px;
-    padding: 10px;
-    width: 100%;
-    max-width: 400px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  /* สไตล์ปุ่ม */
-  .button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .buttonDelete {
-    padding: 10px 20px;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .buttonDelete:hover {
-    background-color: #c0392b;
-  }
-  /* เมื่อ hover ปุ่ม */
-  .button:hover {
-    background-color: #45a049;
-  }
-  
-  /* สไตล์ข้อความ error */
-  .error {
-    color: red;
-    text-align: center;
-  }
-  
-  /* สไตล์สำหรับ <p> ใช้สำหรับ label ข้อมูล */
-  .form p {
-    margin-bottom: 5px; /* ระยะห่างด้านล่างระหว่าง label กับ input */
-    font-size: 1rem;
-    color: #333; /* สีของข้อความ label */
-    text-align: left;
-    width: 100%;
-    max-width: 400px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, #eaf6f5, #c3e5e4);
+}
+
+/* Content */
+.content {
+  padding: 20px;
+  flex-grow: 1;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 20px;
+}
+
+/* Title สำหรับหัวข้อ */
+.title {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #4a5568;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+/* ฟอร์มแก้ไขผู้ใช้ */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+
+}
+
+/* สไตล์ input field */
+.form input {
+  margin-bottom: 12px;
+  padding: 12px;
+  width: 100%;
+  max-width: 450px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s ease;
+}
+
+.form input:focus {
+  border: 1px solid #5a4ec4;
+  outline: none;
+}
+
+.button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff; /* สีฟ้าของปุ่ม */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3; /* สีเข้มขึ้นเมื่อ hover */
+}
+
+.buttonDelete {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #dc3545; /* สีแดงสำหรับลบ */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.buttonDelete:hover {
+  background-color: #b02a37; /* สีเข้มขึ้นเมื่อ hover */
+}
+
+/* สไตล์ข้อความ error */
+.error {
+  color: red;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* สไตล์สำหรับ <p> ใช้สำหรับ label ข้อมูล */
+.form p {
+  margin-bottom: 8px; /* ระยะห่างด้านล่างระหว่าง label กับ input */
+  font-size: 1rem;
+  color: #333; /* สีของข้อความ label */
+  text-align: left;
+  width: 100%;
+  max-width: 450px;
+}
+
+

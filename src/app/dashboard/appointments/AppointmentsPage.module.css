@@ -1,138 +1,184 @@
+/* General Reset */
+/* Body styling */
+.body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
 
-  /* Content styling */
-  .contentContainer {
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    position: sticky;
-    padding: 30px;
-    width: 100%;
-    max-width: 1100px;
-    margin-top: 20px;
-    margin-left: 50px;
-  }
-  
-  /* Title styling */
+/* Content Container */
+.contentContainer {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%;
+  max-width: 1750px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Title */
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #7c9590;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Appointment List */
+.appointmentList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  list-style: none;
+}
+
+/* Appointment Item */
+.appointmentItem {
+  background-color: #eaf2f8;
+  padding: 15px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.appointmentItem:hover {
+  background-color: #d1e8f2;
+}
+
+.appointmentItem p {
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #2c3e50;
+}
+
+/* Add Button Styling */
+.addButton {
+  margin: 20px 0;
+  margin-left: 50px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff; /* White text */
+  background-color: #007bff; /* Blue background */
+  border: none;
+  border-radius: 5px;
+  text-decoration: none; /* Remove underline for link behavior */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.addButton:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.addButton:active {
+  background-color: #003d82; /* Even darker blue when clicked */
+  transform: translateY(2px); /* Pressed effect */
+}
+
+.addButton:disabled {
+  background-color: #cccccc; /* Gray background for disabled state */
+  color: #666666; /* Dark gray text for disabled state */
+  cursor: not-allowed; /* Change cursor to indicate unclickable */
+}
+/* Loading Message */
+.loading {
+  font-size: 1.2rem;
+  color: #7c9590;
+  text-align: center;
+}
+
+/* Success Popup */
+.successPopup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4caf50;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.successIcon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.successPopup p {
+  margin: 0;
+}
+/* สีสำหรับสถานะการนัดหมาย */
+.appointmentList .statusCancelled {
+  color: #e74c3c; /* สีแดงสำหรับยกเลิก */
+}
+
+.appointmentList .statusConfirmed {
+  color: #2ecc71; /* สีเขียวสำหรับยืนยัน */
+}
+
+.appointmentList .statusPending {
+  color: #f39c12; /* สีเหลืองสำหรับรอยืนยัน */
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
   .title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #7c9590;
-    text-align: center;
-    padding: 20px;
-  }
-  
-  /* Appointment list styling */
-  .appointmentList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  /* Individual appointment item styling */
-  .appointmentItem {
-    background-color: #eaf2f8;
-    padding: 15px;
-    border-radius: 6px;
-    margin-bottom: 15px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .appointmentItem p {
-    margin: 5px 0;
-    color: #2c3e50;
-    font-size: 1rem;
-    
-  }
- 
-  /* Hover effect for appointment items */
-  .appointmentItem:hover {
-    background-color: #d1e8f2;
-  }
-  
-  /* Error message styling */
-  .error {
-    color: #e74c3c;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
+    font-size: 1.8rem;
   }
   .addButton {
-    margin: 20px 0;
-    margin-left: 50px;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #ffffff; /* White text */
-    background-color: #007bff; /* Blue background */
+    margin-left: 20px;
+    padding: 10px 15px;
+    font-size: 0.9rem; /* Slightly smaller font */
     border: none;
-    border-radius: 5px;
-    text-decoration: none; /* Remove underline for link behavior */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: background-color 0.3s ease, transform 0.2s ease;
   }
-  
-  .addButton:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
   }
-  
-  .addButton:active {
-    background-color: #003d82; /* Even darker blue when clicked */
-    transform: translateY(2px); /* Pressed effect */
+
+  .appointmentItem {
+    padding: 10px;
   }
-  
-  .addButton:disabled {
-    background-color: #cccccc; /* Gray background for disabled state */
-    color: #666666; /* Dark gray text for disabled state */
-    cursor: not-allowed; /* Change cursor to indicate unclickable */
+
+  .addButton {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    border: none;
   }
-  
-  
-  /* Loading message */
-  .loading {
-    font-size: 1.2rem;
-    color: #7c9590;
-    text-align: center;
-  }
-  .successPopup {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #4caf50;
-    color: white;
+}
+
+@media (max-width: 480px) {
+  .contentContainer {
     padding: 15px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-  
-  .successIcon {
-    margin-right: 10px;
-    font-size: 20px;
+
+  .title {
+    font-size: 1.2rem;
   }
-  
-  .successPopup p {
-    margin: 0;
+
+  .appointmentItem {
+    font-size: 0.9rem;
   }
-  
-  /* Media queries for responsive design */
-  @media (max-width: 768px) {
-    .contentContainer {
-      width: 95%;
-      padding: 20px;
-    }
-  
-    .title {
-      font-size: 1.6rem;
-    }
-  
-    .appointmentItem {
-      padding: 10px;
-    }
+
+  .addButton {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    border: none;
   }
-  
+}

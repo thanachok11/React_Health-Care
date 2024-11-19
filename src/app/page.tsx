@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Navbar from '@/navbar';
-import LoginPageModal from '../app/loginmodal/page'; // Import LoginPageModal component
+import LoginPageModal from './loginmodal/page'; // Import LoginPageModal component
 import styles from './HomePage.module.css';
 
 const HomePage = () => {

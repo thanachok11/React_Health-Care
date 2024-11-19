@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/navbar';
-import styles from '../appointments/AppointmentsPage.module.css';
+import styles from './AppointmentsPage.module.css';
 
 interface Appointment {
   _id: string;
@@ -80,17 +80,28 @@ const AppointmentPage = () => {
         {error && <div className={styles.error}>{error}</div>}
         {appointments.length > 0 ? (
           <ul className={styles.appointmentList}>
-            {appointments.map((appointment) => (
-              <li key={appointment._id} className={styles.appointmentItem}>
-              <p>วันที่: {new Date(appointment.date).toLocaleDateString('th-TH')}</p>
-                <p>เวลา: {appointment.time}</p>
-                <p>ชื่อจริง: {appointment.firstName}</p>
-                <p>นามสกุล: {appointment.lastName}</p>
-                <p>แพทย์: {appointment.doctor}</p>
-                <p>เหตุผลการนัดหมาย: {appointment.reason}</p>
-                <p>สถานะ: {appointment.status}</p>
-              </li>
-            ))}
+            {appointments.map((appointment) => {
+              let statusClass = '';
+              if (appointment.status === 'ยกเลิกการนัดหมาย') {
+                statusClass = styles.statusCancelled;
+              } else if (appointment.status === 'ยืนยันการนัดหมาย') {
+                statusClass = styles.statusConfirmed;
+              } else if (appointment.status === 'รอการยืนยันจากแพทย์') {
+                statusClass = styles.statusPending;
+              }
+  
+              return (
+                <li key={appointment._id} className={styles.appointmentItem}>
+                  <p>วันที่: {new Date(appointment.date).toLocaleDateString('th-TH')}</p>
+                  <p>เวลา: {appointment.time}</p>
+                  <p>ชื่อจริง: {appointment.firstName}</p>
+                  <p>นามสกุล: {appointment.lastName}</p>
+                  <p>แพทย์: {appointment.doctor}</p>
+                  <p>เหตุผลการนัดหมาย: {appointment.reason}</p>
+                  <p className={statusClass}>สถานะ: {appointment.status}</p>
+                </li>
+              );
+            })}
           </ul>
         ) : (
           <p>ไม่มีการนัดหมายในขณะนี้</p>
@@ -98,6 +109,5 @@ const AppointmentPage = () => {
       </div>
     </div>
   );
-};
-
+}  
 export default AppointmentPage;

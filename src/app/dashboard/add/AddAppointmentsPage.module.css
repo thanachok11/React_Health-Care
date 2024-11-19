@@ -4,11 +4,12 @@
     background-color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    position: sticky;
-    padding: 30px;
-    width: 100%;
-    max-width: 1100px;
-    margin-left: 50px;
+    padding: 20px;
+    width: 90%;
+    max-width: 1750px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   /* Title styling */
@@ -127,19 +128,52 @@
     margin: 0;
   }
   
-  /* Media queries for responsive design */
-  @media (max-width: 768px) {
-    .contentContainer {
-      width: 95%;
-      padding: 20px;
-    }
   
-    .title {
-      font-size: 1.6rem;
-    }
-  
-    .appointmentItem {
-      padding: 10px;
-    }
+/* Media Queries */
+@media (max-width: 1024px) {
+  .title {
+    font-size: 1.8rem;
   }
-  
+  .addButton {
+    margin-left: 20px;
+    padding: 10px 15px;
+    font-size: 0.9rem; /* Slightly smaller font */
+    border: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .appointmentItem {
+    padding: 10px;
+  }
+
+  .addButton {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+    border: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .contentContainer {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .appointmentItem {
+    font-size: 0.9rem;
+  }
+
+  .addButton {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    border: none;
+  }
+}

@@ -1,11 +1,23 @@
-import Link from '../node_modules/next/link';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignInAlt, faUserPlus, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
+import LoginPageModal from './app/loginmodal/page'; // Import LoginPageModal component
+import RegisterPageModal from './app/registermodal/page'; // Import RegisterPageModal component
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
+  const [isLoginModalVisible, setIsLoginModalVisible] = useState(false);
+  const [isRegisterModalVisible, setIsRegisterModalVisible] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
+
+  const handleLoginModalToggle = () => {
+    setIsLoginModalVisible(!isLoginModalVisible);
+  };
+
+  const handleRegisterModalToggle = () => {
+    setIsRegisterModalVisible(!isRegisterModalVisible);
+  };
 
   // Check if user is logged in when the component mounts
   useEffect(() => {
@@ -45,18 +57,20 @@ const Navbar = () => {
         ) : (
           <>
             <li>
-              <a className={styles.login} href="/login">
+              <a className={styles.login} onClick={handleLoginModalToggle}>
                 <FontAwesomeIcon icon={faSignInAlt} /> เข้าสู่ระบบ
               </a>
             </li>
             <li>
-              <a className={styles.register} href="/register">
+              <a className={styles.register} onClick={handleRegisterModalToggle}>
                 <FontAwesomeIcon icon={faUserPlus} /> สมัครสมาชิก
               </a>
             </li>
           </>
         )}
       </ul>
+      <LoginPageModal isVisible={isLoginModalVisible} onClose={handleLoginModalToggle} />
+      <RegisterPageModal isVisible={isRegisterModalVisible} onClose={handleRegisterModalToggle} />
     </nav>
   );
 };

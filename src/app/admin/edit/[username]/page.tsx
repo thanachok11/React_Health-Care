@@ -92,7 +92,7 @@ const EditPage = ({ params }: { params: { username: string } }) => {
   return (
     <div className={styles.container}>
       <Navbar />
-      <h1 className={styles.title}>แก้ไขข้อมูลผู้ใช้</h1>
+      <h1 className={styles.title}>รายละเอียดผู้ใช้งาน</h1>
       {loading ? (
         <p>กำลังโหลดข้อมูล...</p>
       ) : (
@@ -105,6 +105,7 @@ const EditPage = ({ params }: { params: { username: string } }) => {
             onChange={handleChange}
             placeholder="อีเมล"
             required
+            readOnly  // ไม่อนุญาตให้แก้ไข username
           />
           <p>ชื่อผู้ใช้</p>
           <input
@@ -134,11 +135,13 @@ const EditPage = ({ params }: { params: { username: string } }) => {
             placeholder="นามสกุล"
             required
           />
-          <button type="submit" className={styles.button}>บันทึกข้อมูล</button>
-          <button type="button" className={styles.buttonDelete} onClick={handleDelete}>ลบข้อมูลผู้ใช้</button>
           {error && <p className={styles.error}>{error}</p>}
         </form>
       )}
+      <div>
+      <button type="submit" className={styles.button}>บันทึกข้อมูล</button>
+      <button type="button" className={styles.buttonDelete} onClick={handleDelete}>ลบข้อมูลผู้ใช้</button>
+      </div>
     </div>
   );
 };

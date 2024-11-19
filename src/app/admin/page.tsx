@@ -63,17 +63,18 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={styles.Navbar}>
       <Navbar />
+    <div className={styles.container}>
       <h1 className={styles.title}>แดชบอร์ด </h1>
+      <h2 className={styles.title2}> ข้อมูลสถิติ</h2>
       <div className={styles.statsContainer}>
-        <h2>ข้อมูลสถิติ</h2>
         <div className={styles.statItem}>
-          <strong>จำนวนผู้ใช้: </strong> 
+          <strong>จำนวนผู้ใช้</strong> 
           {userCount !== null ? userCount : 'กำลังโหลด...'} คน
         </div>
         <div className={styles.statItem}>
-          <strong>จำนวนการนัดหมาย: </strong>
+          <strong>จำนวนการนัดหมาย</strong>
           {appointmentCount !== null ? appointmentCount : 'กำลังโหลด...'} รายการ
         </div>
       </div>
@@ -123,6 +124,7 @@ const Dashboard = () => {
           <div className={styles.loader}>กำลังโหลดกราฟ...</div>
         )}
       </div>
+    </div>
     </div>
   );
 };

@@ -1,107 +1,164 @@
-/* AdminPage.module.css */
+/* Main container */
+.navbar {
+  background-color: #7c9590; /* สีหลักของ Navbar */
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* เพิ่มเงาเล็กน้อย */
+}
 
 .container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-    
-  .title {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #7c9590;
-    margin-top: 20px;
-  }
-  
-  /* Stats container to hold statistics like user count and appointment count */
-.statsContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #eaf6f5, #c3e5e4);
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Page title */
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #205072; /* เชื่อมโยงกับธีมสุขภาพ */
+  margin: 20px 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: -10px;
+}
+.title2{
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #205072; /* เชื่อมโยงกับธีมสุขภาพ */
+  margin: 20px 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: -10px;
+}
+/* Stats section */
+.statsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 40px;
+}
+.statsContainer h2{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+/* Individual stat items */
+.statItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 250px;
+  min-height: 100px;
+  color: #2e7d32;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.statItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Graph container */
+.graphContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
 }
 
-/* Individual stat items */
-.statItem {
-  font-size: 1.2rem;
-  margin: 10px 0;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
-  color: #555;
-}
-
-/* Graph container to hold the chart elements */
-.graphContainer {
-  width: 100%;
-  max-width: 800px;
-  margin-top: 20px;
-  margin-bottom: 50px;
-}
-
-/* Graph title for each section */
+/* Graph title */
 .graphTitle {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
+  color: #205072;
+  margin-bottom: 15px;
   text-align: center;
 }
 
-/* Loading state while data is being fetched */
-.loader {
-  font-size: 1.2rem;
-  text-align: center;
-  color: #888;
-}
-
-/* Styling for the Bar chart elements */
+/* Chart container */
 .chart-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 850px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #fafafa;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   margin: 20px 0;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Loader styling */
+.loader {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #7c9590;
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* Error message styling */
+.error {
+  font-size: 1.5rem;
+  color: #ff3b3b;
+  margin-top: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Responsive styling */
 @media (max-width: 768px) {
   .container {
-    padding: 15px;
+    padding: 10px;
   }
 
   .title {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    margin: 10px 0;
   }
 
   .statsContainer {
-    margin-bottom: 20px;
+    gap: 15px;
   }
 
   .statItem {
-    font-size: 1rem;
-    padding: 8px;
-    margin: 8px 0;
+    width: 100%;
+    max-width: 300px;
+    font-size: 1.2rem;
+    padding: 15px;
   }
 
   .graphTitle {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+  }
+
+  .chart-container {
+    padding: 15px;
   }
 }
-   /* Loading message */
-   .loading {
-    font-size: 1.2rem;
-    color: #7c9590;
-    text-align: center;
-  }
-  .error {
-    color: red;
-    text-align: center;
-  }
-  

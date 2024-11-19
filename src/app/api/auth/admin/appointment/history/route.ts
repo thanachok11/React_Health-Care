@@ -9,7 +9,7 @@ export async function GET(request: Request) {
 
     // ดึงข้อมูลที่มีสถานะ "สำเร็จแล้ว" หรือ "ยกเลิก"
     const appointments = await Appointment.find({
-      status: { $in: ["สำเร็จแล้ว", "ยกเลิก"] }
+      status: { $in: ["ยืนยันการนัดหมาย", "ยกเลิกการนัดหมาย"] }
     });
 
     if (!appointments || appointments.length === 0) {

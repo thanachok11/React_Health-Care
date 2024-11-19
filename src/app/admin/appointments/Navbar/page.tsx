@@ -1,6 +1,6 @@
 import Link from '../../../../../node_modules/next/link';
 import { useEffect, useState } from 'react';
-import styles from '../Navbar/Navbar.module.css';
+import styles from './Navbar.module.css';
 
 const Navbar = () => {
   const [userEmail, setUserEmail] = useState<string | null>(null);

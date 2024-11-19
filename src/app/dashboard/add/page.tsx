@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/navbar";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // นำเข้า CSS ของ react-calendar
-import styles from "../add/AddAppointmentsPage.module.css";
+import styles from "./AddAppointmentsPage.module.css";
 
 const AddAppointmentPage = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
