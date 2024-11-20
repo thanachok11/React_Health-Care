@@ -72,10 +72,6 @@ const HistoryAppointmentsPage = () => {
     fetchAppointments();
   }, []);
 
-  if (loading) {
-    return <p className={styles.loading}>กำลังโหลดข้อมูล...</p>;
-  }
-
   return (
     <div className={styles.pageContainer}>
       <Navbar />
@@ -89,14 +85,16 @@ const HistoryAppointmentsPage = () => {
           placeholder="ค้นหาผู้ป่วย (ชื่อ-นามสกุล)"
           className={styles.searchInput}
         />
-        {filteredAppointments.length > 0 ? (
+        {loading && <p className={styles.loading}>กำลังโหลดข้อมูล...</p>}
+        {!loading && filteredAppointments.length > 0 ? (
           <ul className={styles.appointmentList}>
             {filteredAppointments.map((appointment) => {
               let statusClass = '';
               if (appointment.status === 'ยกเลิกการนัดหมาย') {
                 statusClass = styles.statusCancelled;
               } else if (appointment.status === 'ยืนยันการนัดหมาย') {
-                statusClass = styles.statusConfirmed;}
+                statusClass = styles.statusConfirmed;
+              }
               return (
                 <li key={appointment._id} className={`${styles.appointmentItem} ${statusClass}`}>
                   <p>วันที่: {new Date(appointment.date).toLocaleDateString('th-TH')}</p>
@@ -108,14 +106,14 @@ const HistoryAppointmentsPage = () => {
                   <p>สถานะ: {appointment.status}</p>
                   <p>ผู้ใช้ ID: {appointment.userId}</p>
                   <Link href={`/admin/edit/${appointment.userId}`}>
-                  <button className={styles.edit}>รายละเอียดคนไข้</button>
-                </Link>
+                    <button className={styles.edit}>รายละเอียดคนไข้</button>
+                  </Link>
                 </li>
               );
             })}
           </ul>
         ) : (
-          <p>ไม่พบผู้ป่วยที่ตรงกับการค้นหา</p>
+          !loading && <p>ไม่พบผู้ป่วยที่ตรงกับการค้นหา</p>
         )}
         {error && <p className={styles.error}>{error}</p>}
       </div>

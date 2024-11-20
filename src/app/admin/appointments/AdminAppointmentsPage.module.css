@@ -1,15 +1,7 @@
 
 /* กำหนดพื้นฐานให้กับทั้งหน้า */
-.body {
-  font-family: 'Arial', sans-serif;
-  line-height: 1.6;
-  background-color: #f9f9f9;
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
 .pageContainer{
-  background: linear-gradient(135deg, #eaf6f5, #c3e5e4);
+  background: linear-gradient(100deg, #eaf6f5, #c3e5e4);
 
 }
 /* Content Container */

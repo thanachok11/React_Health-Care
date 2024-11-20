@@ -76,7 +76,6 @@ const AdminAppointmentsPage = () => {
       );
 
       if (res.status === 200) {
-        // อัปเดตสถานะใน state
         setAppointments((prevAppointments) =>
           prevAppointments.map((appointment) =>
             appointment._id === _id
@@ -97,19 +96,15 @@ const AdminAppointmentsPage = () => {
 
   const filteredAppointments = appointments.filter(
     (appointment) =>
-      appointment.status === 'รอการยืนยันจากแพทย์' && // เงื่อนไขแสดงเฉพาะสถานะรอการยืนยันจากแพทย์
+      appointment.status === 'รอการยืนยันจากแพทย์' &&
       `${appointment.firstName} ${appointment.lastName}`
         .toLowerCase()
         .includes(searchQuery.toLowerCase())
-  );  
+  );
 
   useEffect(() => {
     fetchAppointments();
   }, []);
-
-  if (loading) {
-    return <p className={styles.loading}>กำลังโหลดข้อมูล...</p>;
-  }
 
   return (
     <div className={styles.pageContainer}>
@@ -124,8 +119,10 @@ const AdminAppointmentsPage = () => {
           onChange={handleSearchChange}
           className={styles.searchInput}
         />
-        
-        {filteredAppointments.length > 0 ? (
+
+        {loading ? (
+          <p className={styles.loading}>กำลังโหลดข้อมูล...</p>
+        ) : filteredAppointments.length > 0 ? (
           <ul className={styles.appointmentList}>
             {filteredAppointments.map((appointment, index) => (
               <li key={index} className={styles.appointmentItem}>
@@ -138,19 +135,19 @@ const AdminAppointmentsPage = () => {
                 <p>สถานะ: {appointment.status}</p>
                 <p>ผู้ใช้ ID: {appointment.userId}</p>
                 <div>
-                <button
-                  onClick={() => updateStatus(appointment._id, 'ยืนยันการนัดหมาย')}
-                  className={styles.confirm}
-                >
-                  ยืนยัน
-                </button>
-                <button
-                  onClick={() => updateStatus(appointment._id, 'ยกเลิกการนัดหมาย')}
-                  className={styles.cancel}
-                >
-                  ยกเลิก
-                </button>
-              </div>
+                  <button
+                    onClick={() => updateStatus(appointment._id, 'ยืนยันการนัดหมาย')}
+                    className={styles.confirm}
+                  >
+                    ยืนยัน
+                  </button>
+                  <button
+                    onClick={() => updateStatus(appointment._id, 'ยกเลิกการนัดหมาย')}
+                    className={styles.cancel}
+                  >
+                    ยกเลิก
+                  </button>
+                </div>
                 <Link href={`/admin/medical-history/edit/${appointment.userId}`}>
                   <button className={styles.edit}>รายละเอียดคนไข้</button>
                 </Link>
@@ -158,8 +155,9 @@ const AdminAppointmentsPage = () => {
             ))}
           </ul>
         ) : (
-          <p>ไม่มีการนัดหมาย</p>
+          <p>ไม่พบผู้ป่วยที่ตรงกับการค้นหา</p>
         )}
+
         {error && <p className={styles.error}>{error}</p>}
       </div>
     </div>

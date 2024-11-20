@@ -1,9 +1,9 @@
 "use client";
 
-import Navbar from '../../Navbar/page'; // Import Navbar
+import Navbar from '../../Navbar/page';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import styles from './EditPage.module.css';  // Import CSS สำหรับหน้า EditPage
+import styles from './EditPage.module.css';
 
 const EditPage = ({ params }: { params: { username: string } }) => {
   const [formData, setFormData] = useState({
@@ -17,7 +17,6 @@ const EditPage = ({ params }: { params: { username: string } }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // ดึงข้อมูลผู้ใช้ตาม username ที่ต้องการแก้ไขจาก API
     const fetchUserData = async () => {
       try {
         const res = await fetch(`/api/auth/admin/username/${params.username}`);
@@ -41,25 +40,21 @@ const EditPage = ({ params }: { params: { username: string } }) => {
     fetchUserData();
   }, [params.username]);
 
-  // ฟังก์ชันสำหรับจัดการการกรอกข้อมูล
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // ฟังก์ชันสำหรับบันทึกการแก้ไขข้อมูลผู้ใช้
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-
     try {
       const res = await fetch(`/api/auth/admin/username/${params.username}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
       if (res.ok) {
         alert('บันทึกข้อมูลสำเร็จ');
-        router.push('/admin');  // กลับไปที่หน้า AdminPage
+        router.push('/admin');
       } else {
         throw new Error('Failed to update user');
       }
@@ -68,19 +63,15 @@ const EditPage = ({ params }: { params: { username: string } }) => {
     }
   };
 
-  // ฟังก์ชันสำหรับลบข้อมูลผู้ใช้
   const handleDelete = async () => {
-    const confirmDelete = confirm('คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้นี้?');
-    if (!confirmDelete) return;
-
+    if (!confirm('คุณแน่ใจหรือไม่ว่าต้องการลบผู้ใช้นี้?')) return;
     try {
       const res = await fetch(`/api/auth/admin/username/${params.username}`, {
         method: 'DELETE',
       });
-
       if (res.ok) {
         alert('ลบข้อมูลผู้ใช้สำเร็จ');
-        router.push('/admin');  // กลับไปที่หน้า AdminPage
+        router.push('/admin');
       } else {
         throw new Error('Failed to delete user');
       }
@@ -90,57 +81,71 @@ const EditPage = ({ params }: { params: { username: string } }) => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.pageContainer}>
       <Navbar />
-      <h1 className={styles.title}>รายละเอียดผู้ใช้งาน</h1>
-      {loading ? (
-        <p>กำลังโหลดข้อมูล...</p>
-      ) : (
-        <form onSubmit={handleSave} className={styles.form}>
-          <p>อีเมล</p>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="อีเมล"
-            required
-            readOnly  // ไม่อนุญาตให้แก้ไข username
-          />
-          <p>ชื่อผู้ใช้</p>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            placeholder="ชื่อผู้ใช้"
-            required
-            readOnly  // ไม่อนุญาตให้แก้ไข username
-          />
-          <p>ชื่อจริง</p>
-          <input
-            type="text"
-            name="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            placeholder="ชื่อ"
-            required
-          />
-          <p>นามสกุล</p>
-          <input
-            type="text"
-            name="lastName"
-            value={formData.lastName}
-            onChange={handleChange}
-            placeholder="นามสกุล"
-            required
-          />
-          {error && <p className={styles.error}>{error}</p>}
-        </form>
-      )}
-      <div>
-      <button type="submit" className={styles.button}>บันทึกข้อมูล</button>
-      <button type="button" className={styles.buttonDelete} onClick={handleDelete}>ลบข้อมูลผู้ใช้</button>
+      <div className={styles.contentContainer}>
+        <h1 className={styles.title}>รายละเอียดผู้ใช้งาน</h1>
+        {loading ? (
+          <p className={styles.loading}>กำลังโหลดข้อมูล...</p>
+        ) : (
+          <>
+            <form onSubmit={handleSave} className={styles.form}>
+              <div className={styles.formGroup}>
+                <label htmlFor="email">อีเมล</label>
+                <input
+                  id="email"
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="อีเมล"
+                  readOnly
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor="username">ชื่อผู้ใช้</label>
+                <input
+                  id="username"
+                  type="text"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  placeholder="ชื่อผู้ใช้"
+                  readOnly
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor="firstName">ชื่อจริง</label>
+                <input
+                  id="firstName"
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="ชื่อ"
+                  required
+                />
+              </div>
+              <div className={styles.formGroup}>
+                <label htmlFor="lastName">นามสกุล</label>
+                <input
+                  id="lastName"
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="นามสกุล"
+                  required
+                />
+              </div>
+              {error && <p className={styles.error}>{error}</p>}
+            <div className={styles.buttonGroup}>
+              <button type="submit" className={styles.buttonSave}>บันทึกข้อมูล</button>
+              <button type="button" className={styles.buttonDelete} onClick={handleDelete}>ลบข้อมูลผู้ใช้</button>
+            </div>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );
