@@ -1,120 +1,5 @@
-/* Modal.module.css */
-
-.page {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-.container {
-  display: flex;
-  justify-content: center; /* จัดฟอร์มให้อยู่ตรงกลางในแนวนอน */
-  align-items: center; /* จัดฟอร์มให้อยู่ตรงกลางในแนวตั้ง */
-  flex-grow: 1; /* ให้คอนเทนเนอร์ขยายเต็มพื้นที่ที่เหลือ */
-  background-color: #C3E5E4; /* สีพื้นหลังอ่อนเพื่อความสะอาดตา */
-}
+/* Registermodal.module.css */
 .overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-.title {
-  font-family: Arial, sans-serif;
-  color: #7c9590; /* สีเขียวสุขภาพ */
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 2rem;
-}
-.modal {
-  background-color: white;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 450px;
-  padding: 30px 30px 30px 10px;
-  margin-bottom: 180px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-.title {
-  font-size: 2rem;
-  color: #7c9590;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.input {
-  width: 100%;
-  padding: 10px 5px;
-  margin: 5px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 1rem;
-}
-.input:focus {
-  border-color: #2e7d32;
-  outline: none;
-}
-.checkboxContainer {
-  display: flex;
-  align-items: center; /* ทำให้ checkbox กับ label อยู่บรรทัดเดียวกัน */
-  margin: 10px;
-  margin-bottom: 10px;
-}
-
-.checkboxContainer input[type="checkbox"] {
-  margin-right: 10px; /* เพิ่มระยะห่างระหว่าง checkbox กับ label */
-}
-
-.label {
-  font-size: 1rem;
-  color: #333;
-}
-
-.button {
-  width: 100%;
-  padding: 10px;
-  background-color: #2e7d32;
-  color: white;
-  margin: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #1b5e20;
-}
-
-.error {
-  color: #d32f2f; /* สีแดงสด */
-  background-color: #ffebee; /* พื้นหลังสีแดงอ่อน */
-  width: 380px;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px; /* ขอบมน */
-  font-size: 1rem; /* ขนาดตัวอักษร */
-  text-align: center;
-  border: 1px solid #f44336; /* ขอบสีแดงเข้ม */
-}
-.success {
-  color: green;
-  margin-top: 10px;
-  font-size: 0.9rem;
-  text-align: center;
-}
-/* LoginPageModal.module.css */
-.modalOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -126,22 +11,118 @@
   align-items: center;
   z-index: 1000;
 }
-
-.modalContent {
-  padding: 20px;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 400px;
+.overlay .title {
+  font-family: Arial, sans-serif;
+  color: #7c9590; /* สีเขียวสุขภาพ */
+  margin-bottom: 20px;
   text-align: center;
+  font-size: 2rem;
+}
+.modal {
+  background: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 700px; /* ขยายขนาด modal */
+  width: 100%;
   position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* แบ่งฟอร์มเป็น 2 คอลัมน์ */
+  gap: 15px; /* เว้นระยะระหว่างช่องกรอกข้อมูล */
+}
+
+.input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+.input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.3);
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  grid-column: span 2; /* ให้ช่อง checkbox ขยายออกครอบคลุมทั้ง 2 คอลัมน์ */
+}
+
+.checkboxLabel {
+  font-size: 14px;
+  color: #333;
+}
+
+.button {
+  background: #007bff;
+  color: #fff;
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background: #0056b3;
+}
+
+.error {
+  color: #d9534f;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.success {
+  color: #5cb85c;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 10px;
 }
 
 .closeButton {
   position: absolute;
-  top: 40px;
-  right: 20px;
-  background: transparent;
+  top: 10px;
+  right: 10px;
+  background: none;
   border: none;
   font-size: 20px;
+  font-weight: bold;
+  color: #333;
   cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+  color: #d9534f;
 }

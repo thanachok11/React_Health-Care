@@ -10,50 +10,62 @@ const RegisterModal = ({ isVisible, onClose }) => {
     password: '',
     username: '',
     firstName: '',
-    lastName: ''
+    lastName: '',
+    phoneNumber: '', // เบอร์โทรศัพท์
+    address: '', // ที่อยู่
+    dateOfBirth: '', // วันเกิด
+    bloodType: '', // หมู่เลือด
+    History_drug_allergy: '', // ประวัติการแพ้ยา (คั่นด้วยเครื่องหมายจุลภาค)
   });
+  
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [acceptedTerms, setAcceptedTerms] = useState(false); // สำหรับการยอมรับเงื่อนไข
   const router = useRouter();
 
   // ฟังก์ชันสำหรับการอัพเดตฟิลด์จากการกรอกข้อมูล
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
+  
 
   // ฟังก์ชันสำหรับจัดการการยอมรับเงื่อนไข
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAcceptedTerms(e.target.checked);
   };
 
-  const handleRegister = async (e: React.FormEvent) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
-
+  
     if (!acceptedTerms) {
       setError('คุณต้องยอมรับเงื่อนไขก่อนสมัครสมาชิก');
       setSuccessMessage('');
       return;
     }
-
+  
+    const dataToSend = {
+      ...formData,
+      History_drug_allergy: formData.History_drug_allergy.split(',').map((item) => item.trim()),
+    };
+  
     try {
       const response = await fetch('/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(dataToSend),
       });
-
+  
       if (response.ok) {
         setSuccessMessage('สมัครสมาชิกสำเร็จ! คุณสามารถเข้าสู่ระบบได้แล้ว');
         setError('');
         setTimeout(() => {
           router.push('/login');
-          onClose(); // Close the modal after successful registration
+          onClose();
         }, 2000);
       } else {
         const data = await response.json();
@@ -65,6 +77,7 @@ const RegisterModal = ({ isVisible, onClose }) => {
       setSuccessMessage('');
     }
   };
+  
 
   if (!isVisible) return null; // Return null if modal is not visible
 
@@ -118,6 +131,51 @@ const RegisterModal = ({ isVisible, onClose }) => {
             className={styles.input}
             required
           />
+          <input
+            type="tel"
+            name="phoneNumber"
+            placeholder="เบอร์โทรศัพท์"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <input
+            type="text"
+            name="address"
+            placeholder="ที่อยู่"
+            value={formData.address}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <input
+            type="date"
+            name="dateOfBirth"
+            placeholder="วันเกิด"
+            value={formData.dateOfBirth}
+            onChange={handleChange}
+            className={styles.input}
+          />
+          <select
+            name="bloodType"
+            value={formData.bloodType}
+            onChange={handleChange}
+            className={styles.input}
+          >
+            <option value="">เลือกหมู่เลือด</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="AB">AB</option>
+            <option value="O">O</option>
+          </select>
+          <input
+            type="text"
+            name="History of drug allergy"
+            placeholder="ประวัติการแพ้ยา (คั่นด้วย ,)"
+            value={formData.History_drug_allergy}
+            onChange={handleChange}
+            className={styles.input}
+          />
+
           {/* Checkbox สำหรับการยอมรับเงื่อนไข */}
           <div className={styles.checkboxContainer}>
             <input

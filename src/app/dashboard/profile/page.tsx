@@ -9,6 +9,11 @@ interface User {
   username: string;
   firstName: string;
   lastName: string;
+  phoneNumber?: string;
+  address?: string;
+  dateOfBirth?: string;
+  bloodType?: string;
+  History_drug_allergy?: string[];
 }
 
 const ProfilePage = () => {
@@ -17,7 +22,12 @@ const ProfilePage = () => {
     email: '',
     username: '',
     firstName: '',
-    lastName: ''
+    lastName: '',
+    phoneNumber: '',
+    address: '',
+    dateOfBirth: '',
+    bloodType: '',
+    History_drug_allergy: ''
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -48,7 +58,12 @@ const ProfilePage = () => {
         email: data.user.email,
         username: data.user.username,
         firstName: data.user.firstName,
-        lastName: data.user.lastName
+        lastName: data.user.lastName,
+        phoneNumber: data.user.phoneNumber,
+        address: data.user.address,
+        dateOfBirth: data.user.dateOfBirth,
+        bloodType: data.user.bloodType,
+        History_drug_allergy: data.user.History_drug_allergy?.join(', ') || ''
       });
     } catch (err) {
       setError('ไม่สามารถดึงข้อมูลผู้ใช้ได้');
@@ -61,7 +76,7 @@ const ProfilePage = () => {
     fetchUserData();
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
@@ -97,19 +112,19 @@ const ProfilePage = () => {
     }
   };
 
-  if (loading) {
-    return <p className={styles.loading}>กำลังโหลดข้อมูล...</p>;
-  }
-
   return (
     <div className={styles.pageContainer}>
       <Navbar />
       <div className={styles.formContainer}>
         <h1 className={styles.title}>โปรไฟล์ของฉัน</h1>
+
+        {/* แสดงข้อความกำลังโหลดเฉพาะเมื่อยังไม่ได้โหลดข้อมูล */}
+        {loading && <p className={styles.loading}>กำลังโหลดข้อมูล...</p>}
+
         {user ? (
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputGroup}>
-              <label>Username:</label>
+              <label>ชื่อผู้ใช้:</label>
               <input
                 type="text"
                 name="username"
@@ -121,7 +136,7 @@ const ProfilePage = () => {
               />
             </div>
             <div className={styles.inputGroup}>
-              <label>First Name:</label>
+              <label>ชื่อจริง:</label>
               <input
                 type="text"
                 name="firstName"
@@ -132,7 +147,7 @@ const ProfilePage = () => {
               />
             </div>
             <div className={styles.inputGroup}>
-              <label>Last Name:</label>
+              <label>นามสกุล:</label>
               <input
                 type="text"
                 name="lastName"
@@ -140,6 +155,58 @@ const ProfilePage = () => {
                 onChange={handleChange}
                 className={styles.input}
                 required
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>เบอร์โทรศัพท์:</label>
+              <input
+                type="text"
+                name="phoneNumber"
+                value={form.phoneNumber}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>ที่อยู่:</label>
+              <textarea
+                name="address"
+                value={form.address}
+                onChange={handleChange}
+                className={styles.input}
+                required
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>วันเกิด</label>
+              <input
+                type="text"
+                name="dateOfBirth"
+                value={new Date(form.dateOfBirth).toLocaleDateString('th-TH')}
+                onChange={handleChange}
+                className={styles.input}
+                disabled // ทำให้ไม่สามารถแก้ไขได้และจะไม่ถูกส่งไปในฟอร์ม
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>กรุ๊ปเลือด:</label>
+              <input
+                type="text"
+                name="bloodType"
+                value={form.bloodType}
+                onChange={handleChange}
+                className={styles.input}
+                disabled // ทำให้ไม่สามารถแก้ไขได้และจะไม่ถูกส่งไปในฟอร์ม
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label>ประวัติแพ้ยา:</label>
+              <textarea
+                name="History_drug_allergy"
+                value={form.History_drug_allergy}
+                onChange={handleChange}
+                className={styles.input}
               />
             </div>
             <button type="submit" className={styles.button}>อัปเดตโปรไฟล์</button>

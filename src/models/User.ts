@@ -7,19 +7,31 @@ export interface IUser extends Document {
   username: string;
   firstName: string;
   lastName: string;
+  phoneNumber?: string;
+  address?: string;
+  dateOfBirth?: Date;
+  bloodType?: string;
+  History_drug_allergy?: string[];
   comparePassword: (password: string) => Promise<boolean>;
 }
 
-const UserSchema: Schema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  username: { type: String, required: true, unique: true }, // เพิ่มตรงนี้
-  firstName: { type: String, required: true }, // เพิ่มตรงนี้
-  lastName: { type: String, required: true } // เพิ่มตรงนี้
-}, {
-  timestamps: true
-});
-
+const UserSchema: Schema = new mongoose.Schema(
+  {
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    username: { type: String, required: true, unique: true },
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    phoneNumber: { type: String }, // เพิ่มฟิลด์เบอร์โทรศัพท์
+    address: { type: String }, // เพิ่มฟิลด์ที่อยู่
+    dateOfBirth: { type: Date }, // เพิ่มฟิลด์วันเกิด
+    bloodType: { type: String, enum: ['A', 'B', 'AB', 'O'] }, // เพิ่มฟิลด์หมู่เลือด
+    History_drug_allergy: { type: [String] }, // เพิ่มฟิลด์ประวัติการแพ้ยา (Array)
+  },
+  {
+    timestamps: true, // เพิ่ม timestamp (createdAt, updatedAt)
+  }
+);
 
 // Hash password before saving the user
 UserSchema.pre('save', async function (next) {

@@ -7,11 +7,22 @@ export async function POST(request: Request) {
     await connectMongo();
 
     // รับข้อมูลจาก request body
-    const { email, password, username, firstName, lastName } = await request.json();
+    const {
+      email,
+      password,
+      username,
+      firstName,
+      lastName,
+      phoneNumber,
+      address,
+      dateOfBirth,
+      bloodType,
+      History_drug_allergy,
+    } = await request.json();
 
-    // ตรวจสอบว่า email หรือ username มีอยู่ในระบบแล้วหรือไม่
+    // ตรวจสอบว่ามี email หรือ username อยู่ในระบบแล้วหรือไม่
     const existingUser = await User.findOne({
-      $or: [{ email }, { username }]
+      $or: [{ email }, { username }],
     });
 
     if (existingUser) {
@@ -22,22 +33,30 @@ export async function POST(request: Request) {
         return NextResponse.json({ message: 'Username already taken' }, { status: 400 });
       }
     }
+
     // สร้างผู้ใช้ใหม่
     const newUser = new User({
       email,
       password,
       username,
       firstName,
-      lastName
+      lastName,
+      phoneNumber, // เบอร์โทรศัพท์
+      address, // ที่อยู่
+      dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : undefined, // วันเกิด
+      bloodType, // หมู่เลือด
+      History_drug_allergy, // ประวัติการแพ้ยา
     });
 
     // บันทึกผู้ใช้ลงในฐานข้อมูล
     await newUser.save();
 
     return NextResponse.json({ message: 'User registered successfully' }, { status: 201 });
-
   } catch (error: any) {
     console.error('Error during registration:', error);
-    return NextResponse.json({ message: 'Registration failed', error: error.message || 'Unknown error' }, { status: 500 });
+    return NextResponse.json(
+      { message: 'Registration failed', error: error.message || 'Unknown error' },
+      { status: 500 }
+    );
   }
 }

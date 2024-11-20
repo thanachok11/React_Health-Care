@@ -13,21 +13,25 @@
     flex-grow: 1;
     background-color: #f0f4f8;
     padding: 40px;
+    margin-left: 20px;
   }
   
   .title {
     font-size: 2rem;
-    color: #2e7d32;
+    font-weight: bold;
+    color: #7c9590;
+    text-align: center;
+    margin-top: -20px;
     margin-bottom: 20px;
   }
-  
+
   .form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 400px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* แบ่งฟอร์มเป็น 2 คอลัมน์ */
+    gap: 50px; /* เว้นระยะระหว่างช่องกรอกข้อมูล */
+    margin-left: 30px;
     background-color: white;
-    padding: 40px;
+    padding: 50px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
@@ -44,6 +48,13 @@
   .input:focus {
     border-color: #2e7d32;
     outline: none;
+  }
+  .inputGroup label{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #7c9590;
+    text-align: center;
+    margin-bottom: 20px;
   }
   
   .button {
