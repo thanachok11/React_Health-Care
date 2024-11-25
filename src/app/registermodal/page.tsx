@@ -11,6 +11,7 @@ const RegisterModal = ({ isVisible, onClose }) => {
     username: '',
     firstName: '',
     lastName: '',
+    sex:'',
     phoneNumber: '', // เบอร์โทรศัพท์
     address: '', // ที่อยู่
     dateOfBirth: '', // วันเกิด
@@ -127,6 +128,15 @@ const RegisterModal = ({ isVisible, onClose }) => {
             name="lastName"
             placeholder="นามสกุล"
             value={formData.lastName}
+            onChange={handleChange}
+            className={styles.input}
+            required
+          />
+          <input
+            type="text"
+            name="sex"
+            placeholder="เพศ"
+            value={formData.sex}
             onChange={handleChange}
             className={styles.input}
             required

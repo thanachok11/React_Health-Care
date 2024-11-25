@@ -1,5 +1,6 @@
 import Link from '../../../../../node_modules/next/link';
 import { useEffect, useState } from 'react';
+import { FaUserCircle } from 'react-icons/fa'; // เพิ่มไอคอนผู้ใช้งาน
 import styles from './Navbar.module.css';
 
 const Navbar = () => {
@@ -23,22 +24,22 @@ const Navbar = () => {
 
   return (
     <nav className={styles.navbar}>
-      <Link href="/admin" className={styles.link}>
+      <Link href="/dashboard" className={styles.link}>
         <div className={styles.logo}>Balance Care</div>
       </Link>
       <ul className={styles.navLinks}>
         {userEmail ? (
           <>
             <li>
-              <Link href="/admin/appointments" className={`${styles.link} ${styles.specialLink}`}>
-                <span className={styles.icon}>📅 </span>
-                รายการนัดหมาย
+              <Link href="/dashboard/history" className={`${styles.link} ${styles.specialLink}`}>
+                <span className={styles.icon}>🩺</span>
+                ประวัติการรักษา
               </Link>
             </li>
             <li>
-              <Link href="/admin/appointments/history" className={`${styles.link} ${styles.specialLink}`}>
-                <span className={styles.icon}>📝 </span>
-                ประวัติการนัดหมาย
+              <Link href="/dashboard/appointments" className={`${styles.link} ${styles.specialLink}`}>
+                <span className={styles.icon}>📅</span>
+                การนัดหมาย
               </Link>
             </li>
             <li>

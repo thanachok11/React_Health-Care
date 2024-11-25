@@ -148,9 +148,6 @@ const AdminAppointmentsPage = () => {
                     ยกเลิก
                   </button>
                 </div>
-                <Link href={`/admin/medical-history/edit/${appointment.userId}`}>
-                  <button className={styles.edit}>รายละเอียดคนไข้</button>
-                </Link>
               </li>
             ))}
           </ul>

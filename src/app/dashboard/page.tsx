@@ -1,6 +1,6 @@
 "use client";
 
-import Navbar from '@/navbar';  // Import the Navbar component
+import Navbar from '../dashboard/appointments/Navbar/page';  // Import the Navbar component
 import styles from './DashboardPage.module.css';
 import Link from 'next/link';
 

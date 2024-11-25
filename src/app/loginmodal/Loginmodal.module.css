@@ -74,7 +74,7 @@
 .button {
   width: 100%;
   padding: 10px;
-  background-color: #2e7d32;
+  background-color: #6d98c6;
   color: white;
   margin: 10px;
   border: none;
@@ -85,7 +85,7 @@
 }
 
 .button:hover {
-  background-color: #1b5e20;
+  background-color: #93bce8;
 }
 
 .error {
@@ -102,6 +102,7 @@
 .success {
   color: green;
   margin-top: 10px;
+  margin-left: 20px;
   font-size: 0.9rem;
   text-align: center;
 }

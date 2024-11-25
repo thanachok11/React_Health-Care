@@ -14,6 +14,7 @@ const EditPage = ({ params }: { params: { username: string } }) => {
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const router = useRouter();
 
   useEffect(() => {
@@ -53,7 +54,11 @@ const EditPage = ({ params }: { params: { username: string } }) => {
         body: JSON.stringify(formData),
       });
       if (res.ok) {
-        alert('บันทึกข้อมูลสำเร็จ');
+        setSuccessMessage('บันทึกข้อมูลสำเร็จ');
+        setError('');
+        setTimeout(() => {
+          setSuccessMessage('');
+        }, 3000); // Hide the message after 3 seconds
         router.push('/admin');
       } else {
         throw new Error('Failed to update user');
@@ -139,10 +144,11 @@ const EditPage = ({ params }: { params: { username: string } }) => {
                 />
               </div>
               {error && <p className={styles.error}>{error}</p>}
-            <div className={styles.buttonGroup}>
-              <button type="submit" className={styles.buttonSave}>บันทึกข้อมูล</button>
-              <button type="button" className={styles.buttonDelete} onClick={handleDelete}>ลบข้อมูลผู้ใช้</button>
-            </div>
+              {successMessage && <p className={styles.success}>{successMessage}</p>}
+              <div className={styles.buttonGroup}>
+                <button type="submit" className={styles.buttonSave}>บันทึกข้อมูล</button>
+                <button type="button" className={styles.buttonDelete} onClick={handleDelete}>ลบข้อมูลผู้ใช้</button>
+              </div>
             </form>
           </>
         )}

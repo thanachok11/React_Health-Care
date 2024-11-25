@@ -13,6 +13,7 @@ export async function POST(request: Request) {
       username,
       firstName,
       lastName,
+      sex,
       phoneNumber,
       address,
       dateOfBirth,
@@ -41,6 +42,7 @@ export async function POST(request: Request) {
       username,
       firstName,
       lastName,
+      sex,
       phoneNumber, // เบอร์โทรศัพท์
       address, // ที่อยู่
       dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : undefined, // วันเกิด

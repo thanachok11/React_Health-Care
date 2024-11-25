@@ -7,6 +7,7 @@ export interface IUser extends Document {
   username: string;
   firstName: string;
   lastName: string;
+  sex: string;
   phoneNumber?: string;
   address?: string;
   dateOfBirth?: Date;
@@ -22,6 +23,7 @@ const UserSchema: Schema = new mongoose.Schema(
     username: { type: String, required: true, unique: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
+    sex: { type: String, required: true },
     phoneNumber: { type: String }, // เพิ่มฟิลด์เบอร์โทรศัพท์
     address: { type: String }, // เพิ่มฟิลด์ที่อยู่
     dateOfBirth: { type: Date }, // เพิ่มฟิลด์วันเกิด
