@@ -77,12 +77,12 @@ const HistoryAppointmentsPage = () => {
       <Navbar />
       <div className={styles.contentContainer}>
         <h1 className={styles.title}>ประวัติการนัดหมาย</h1>
-        <h2 className={styles.title2}>ค้นหาคนไข้</h2>
+        <h2 className={styles.title2}>ค้นหาผู้ป่วย</h2>
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => handleSearch(e.target.value)}
-          placeholder="ค้นหาคนไข้ (ชื่อ-นามสกุล)"
+          placeholder="ค้นหาผู้ป่วย (ชื่อ-นามสกุล)"
           className={styles.searchInput}
         />
         {loading && <p className={styles.loading}>กำลังโหลดข้อมูล...</p>}

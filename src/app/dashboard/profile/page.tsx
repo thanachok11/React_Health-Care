@@ -1,38 +1,28 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Navbar from '@/navbar';
-import styles from './ProfilePage.module.css';
+import Navbar from '../Navbar/page';
+import styles from './ProfilePage1.module.css';
 
 interface User {
   email: string;
   username: string;
   firstName: string;
   lastName: string;
-  phoneNumber?: string;
-  address?: string;
-  dateOfBirth?: string;
-  bloodType?: string;
-  History_drug_allergy?: string[];
+  sex: string;
+  img: string;
+  phoneNumber: string;
+  address: string;
+  dateOfBirth: string;
+  bloodType: string;
+  History_drug_allergy: string[];
 }
 
 const ProfilePage = () => {
   const [user, setUser] = useState<User | null>(null);
-  const [form, setForm] = useState({
-    email: '',
-    username: '',
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
-    address: '',
-    dateOfBirth: '',
-    bloodType: '',
-    History_drug_allergy: ''
-  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const router = useRouter();
-  const [successMessage, setSuccessMessage] = useState('');
 
   const fetchUserData = async () => {
     const token = localStorage.getItem('token');
@@ -54,17 +44,6 @@ const ProfilePage = () => {
 
       const data = await res.json();
       setUser(data.user);
-      setForm({
-        email: data.user.email,
-        username: data.user.username,
-        firstName: data.user.firstName,
-        lastName: data.user.lastName,
-        phoneNumber: data.user.phoneNumber,
-        address: data.user.address,
-        dateOfBirth: data.user.dateOfBirth,
-        bloodType: data.user.bloodType,
-        History_drug_allergy: data.user.History_drug_allergy?.join(', ') || ''
-      });
     } catch (err) {
       setError('ไม่สามารถดึงข้อมูลผู้ใช้ได้');
     } finally {
@@ -76,145 +55,71 @@ const ProfilePage = () => {
     fetchUserData();
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const token = localStorage.getItem('token');
-    if (!token) return;
-
-    try {
-      const res = await fetch('/api/auth/users', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(form),
-      });
-
-      if (!res.ok) {
-        throw new Error('Failed to update profile');
-      }
-
-      setSuccessMessage('อัพเดทข้อมูลสำเร็จแล้ว!!');
-      setTimeout(() => {
-        router.push('/dashboard');
-      }, 2000);
-    } catch (err) {
-      setError('ไม่สามารถอัปเดตโปรไฟล์ได้');
-    }
+  const handleEditClick = () => {
+    router.push('./edit-profile');
   };
 
   return (
     <div className={styles.pageContainer}>
       <Navbar />
-      <div className={styles.formContainer}>
-        <h1 className={styles.title}>โปรไฟล์ของฉัน</h1>
-
-        {/* แสดงข้อความกำลังโหลดเฉพาะเมื่อยังไม่ได้โหลดข้อมูล */}
+      <h1 className={styles.title}>โปรไฟล์ของฉัน</h1>
+      <div className={styles.contentContainer}>
         {loading && <p className={styles.loading}>กำลังโหลดข้อมูล...</p>}
-
+        {error && <p className={styles.error}>{error}</p>}
         {user ? (
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div className={styles.inputGroup}>
-              <label>ชื่อผู้ใช้:</label>
-              <input
-                type="text"
-                name="username"
-                value={form.username}
-                onChange={handleChange}
-                className={styles.input}
-                required
-                disabled // ทำให้ไม่สามารถแก้ไขได้และจะไม่ถูกส่งไปในฟอร์ม
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label>ชื่อจริง:</label>
-              <input
-                type="text"
-                name="firstName"
-                value={form.firstName}
-                onChange={handleChange}
-                className={styles.input}
-                required
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label>นามสกุล:</label>
-              <input
-                type="text"
-                name="lastName"
-                value={form.lastName}
-                onChange={handleChange}
-                className={styles.input}
-                required
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label>เบอร์โทรศัพท์:</label>
-              <input
-                type="text"
-                name="phoneNumber"
-                value={form.phoneNumber}
-                onChange={handleChange}
-                className={styles.input}
-                required
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label>ที่อยู่:</label>
-              <textarea
-                name="address"
-                value={form.address}
-                onChange={handleChange}
-                className={styles.input}
-                required
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label>วันเกิด</label>
-              <input
-                type="text"
-                name="dateOfBirth"
-                value={new Date(form.dateOfBirth).toLocaleDateString('th-TH')}
-                onChange={handleChange}
-                className={styles.input}
-                disabled // ทำให้ไม่สามารถแก้ไขได้และจะไม่ถูกส่งไปในฟอร์ม
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label>กรุ๊ปเลือด:</label>
-              <input
-                type="text"
-                name="bloodType"
-                value={form.bloodType}
-                onChange={handleChange}
-                className={styles.input}
-                disabled // ทำให้ไม่สามารถแก้ไขได้และจะไม่ถูกส่งไปในฟอร์ม
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label>ประวัติแพ้ยา:</label>
-              <textarea
-                name="History_drug_allergy"
-                value={form.History_drug_allergy}
-                onChange={handleChange}
-                className={styles.input}
-              />
-            </div>
-            <button type="submit" className={styles.button}>อัปเดตโปรไฟล์</button>
-            {successMessage && <p className={styles.success}>{successMessage}</p>}
-            {error && <p className={styles.error}>{error}</p>}
-          </form>
+          <div className={styles.profileWrapper}>
+            {/* รูปโปรไฟล์ */}
+            <section className={styles.profileImageSection}>
+              <img src={user.img} alt="User Image" className={styles.profileImage} />
+            </section>
+
+            {/* ข้อมูลโปรไฟล์ */}
+            <section className={styles.profileInfoSection}>
+              <div className={styles.inputGroup}>
+                <label>ชื่อผู้ใช้:</label>
+                <p>{user.username}</p>
+              </div>
+              <div className={styles.inputGroup}>
+                <label>ชื่อจริง:</label>
+                <p>{user.firstName}</p>
+              </div>
+              <div className={styles.inputGroup}>
+                <label>นามสกุล:</label>
+                <p>{user.lastName}</p>
+              </div>
+              <div className={styles.inputGroup}>
+                <label>เพศ:</label>
+                <p>{user.sex}</p>
+              </div>
+              <div className={styles.inputGroup}>
+                <label>เบอร์โทรศัพท์:</label>
+                <p>{user.phoneNumber}</p>
+              </div>
+              <div className={styles.inputGroup}>
+                <label>ที่อยู่:</label>
+                <p>{user.address}</p>
+              </div>
+              <div className={styles.inputGroup}>
+                <label>วันเกิด:</label>
+                <p>{new Date(user.dateOfBirth).toLocaleDateString('th-TH')}</p>
+              </div>
+              <div className={styles.inputGroup}>
+                <label>กรุ๊ปเลือด:</label>
+                <p>{user.bloodType}</p>
+              </div>
+              <div className={styles.inputGroup}>
+                <label>ประวัติแพ้ยา:</label>
+                <p>{user.History_drug_allergy.join(', ') || 'ไม่มีข้อมูล'}</p>
+              </div>
+            </section>
+
+            {/* ปุ่มแก้ไข */}
+            <section className={styles.actionSection}>
+              <button onClick={handleEditClick}>แก้ไขข้อมูล</button>
+            </section>
+          </div>
         ) : (
-          <p>ไม่พบข้อมูลผู้ใช้</p>
+          <p className={styles.noData}>ไม่พบข้อมูลผู้ใช้</p>
         )}
       </div>
     </div>

@@ -10,6 +10,7 @@ const UserDetailPage = ({ params }: { params: { userId: string } }) => {
     username: '',
     firstName: '',
     lastName: '',
+    sex:'',
     phoneNumber: '', // เบอร์โทรศัพท์
     address: '', // ที่อยู่
     dateOfBirth: '', // วันเกิด
@@ -33,6 +34,7 @@ const UserDetailPage = ({ params }: { params: { userId: string } }) => {
           username: data.user.username,
           firstName: data.user.firstName,
           lastName: data.user.lastName,
+          sex: data.user.sex,
           phoneNumber: data.user.phoneNumber,
           address: data.user.address,
           dateOfBirth: data.user.dateOfBirth,
@@ -81,6 +83,7 @@ const UserDetailPage = ({ params }: { params: { userId: string } }) => {
             <p>อีเมล: {formData.email}</p>
             <p>ชื่อผู้ใช้: {formData.username}</p>
             <p>เบอร์โทรศัพท์: {formData.phoneNumber}</p>
+            <p>เพศ: {formData.sex}</p>
             <p>ที่อยู่: {formData.address}</p>
             <p>วันเกิด: {new Date(formData.dateOfBirth).toLocaleDateString('th-TH')}</p>
             <p>หมู่เลือด: {formData.bloodType}</p>

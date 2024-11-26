@@ -132,15 +132,17 @@ const RegisterModal = ({ isVisible, onClose }) => {
             className={styles.input}
             required
           />
-          <input
-            type="text"
-            name="sex"
-            placeholder="เพศ"
+          <select
+            name="bloodType"
             value={formData.sex}
             onChange={handleChange}
             className={styles.input}
-            required
-          />
+          >
+            <option value="">เลือกเพศ</option>
+            <option value="ผู้ชาย">ผู้ชาย</option>
+            <option value="ผู้หญิง">ผู้หญิง</option>
+            <option value="เพศทางเลือก">เพศทางเลือก</option>
+          </select>
           <input
             type="tel"
             name="phoneNumber"

@@ -57,6 +57,11 @@ export async function PUT(request: Request) {
         username: body.username,
         firstName: body.firstName,
         lastName: body.lastName,
+        phoneNumber: body.phoneNumber,
+        address: body.address,
+        dateOfBirth: body.dateOfBirth,
+        bloodType: body.loodType,
+        History_drug_allergy: body.History_drug_allergy,
         updatedAt: new Date() // อัปเดตเวลาที่มีการแก้ไขล่าสุด
       }, { new: true });
 

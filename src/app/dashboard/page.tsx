@@ -1,6 +1,6 @@
 "use client";
 
-import Navbar from '../dashboard/appointments/Navbar/page';  // Import the Navbar component
+import Navbar from './Navbar/page';  // Import the Navbar component
 import styles from './DashboardPage.module.css';
 import Link from 'next/link';
 
@@ -23,7 +23,7 @@ const DashboardPage = () => {
               <p>ดูการนัดหมายที่กำลังจะมาถึงและกำหนดการนัดใหม่</p>
             </div>
           </Link>
-          <Link href="/dashboard/history" className={styles.cardLink}>
+          <Link href="/dashboard/medical-history" className={styles.cardLink}>
             <div className={styles.card}>
               <h2>ประวัติการรักษา</h2>
               <p>ตรวจสอบประวัติการรักษาและการรักษาที่ผ่านมา</p>

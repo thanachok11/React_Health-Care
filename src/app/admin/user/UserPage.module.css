@@ -3,7 +3,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   background: linear-gradient(135deg, #eaf6f5, #c3e5e4);
 }
 

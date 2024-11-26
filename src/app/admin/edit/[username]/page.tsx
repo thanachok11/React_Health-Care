@@ -58,8 +58,9 @@ const EditPage = ({ params }: { params: { username: string } }) => {
         setError('');
         setTimeout(() => {
           setSuccessMessage('');
-        }, 3000); // Hide the message after 3 seconds
-        router.push('/admin');
+          router.push('/admin');
+        }, 2000); // Hide the message after 3 seconds
+       
       } else {
         throw new Error('Failed to update user');
       }

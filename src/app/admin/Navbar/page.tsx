@@ -32,19 +32,19 @@ const Navbar = () => {
           <>
             <li>
               <Link href="/admin/medical-history" className={`${styles.link} ${styles.specialLink}`}>
-                <span className={styles.icon}>🩺</span>
+                <span className={styles.icon}>🩺 </span>
                 ประวัติการรักษา
               </Link>
             </li>
             <li>
               <Link href="/admin/appointments" className={`${styles.link} ${styles.specialLink}`}>
-                <span className={styles.icon}>📅</span>
+                <span className={styles.icon}>📅 </span>
                 การนัดหมาย
               </Link>
             </li>
             <li>
               <Link href="/admin/recent-activities" className={`${styles.link} ${styles.specialLink}`}>
-                <span className={styles.icon}>📝</span>
+                <span className={styles.icon}>📝 </span>
                 กิจกรรมล่าสุด
               </Link>
             </li>

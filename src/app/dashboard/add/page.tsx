@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/navbar";
+import Navbar from "@/Navbar";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // นำเข้า CSS ของ react-calendar
 import styles from "./AddAppointmentsPage.module.css";
