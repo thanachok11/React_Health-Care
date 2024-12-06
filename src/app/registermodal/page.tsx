@@ -133,7 +133,7 @@ const RegisterModal = ({ isVisible, onClose }) => {
             required
           />
           <select
-            name="bloodType"
+            name="sex"
             value={formData.sex}
             onChange={handleChange}
             className={styles.input}
@@ -181,7 +181,7 @@ const RegisterModal = ({ isVisible, onClose }) => {
           </select>
           <input
             type="text"
-            name="History of drug allergy"
+            name="History_drug_allergy"
             placeholder="ประวัติการแพ้ยา (คั่นด้วย ,)"
             value={formData.History_drug_allergy}
             onChange={handleChange}
