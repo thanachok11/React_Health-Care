@@ -1,4 +1,6 @@
 /* Navbar styles */
+*
+
 .navbar {
   background-color: #7c9590; /* สีหลักของ Navbar */
   display: flex;

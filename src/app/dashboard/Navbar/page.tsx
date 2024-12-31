@@ -1,3 +1,4 @@
+"use client";
 import Link from '../../../../node_modules/next/link';
 import { useEffect, useState } from 'react';
 import { FaUserCircle } from 'react-icons/fa'; // เพิ่มไอคอนผู้ใช้งาน

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Navbar from '@/navbar';  // Import the Navbar component
+import Navbar from '@/navbar1';  // Import the Navbar component
 import styles from './LoginPage.module.css';
 
 const LoginPage = () => {

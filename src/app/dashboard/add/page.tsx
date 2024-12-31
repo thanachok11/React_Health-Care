@@ -1,14 +1,14 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/Navbar";
+import Navbar from "@/navbar1";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css"; // นำเข้า CSS ของ react-calendar
+import "react-calendar/dist/Calendar.css";
 import styles from "./AddAppointmentsPage.module.css";
 
 const AddAppointmentPage = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  const [time, setTime] = useState<string>(""); // เก็บเวลา
+  const [time, setTime] = useState<string>("");
   const [newAppointment, setNewAppointment] = useState({
     doctor: "",
     reason: "",
@@ -31,36 +31,37 @@ const AddAppointmentPage = () => {
   const addAppointment = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      router.push("/login");
+      setError("กรุณาเข้าสู่ระบบก่อนทำการเพิ่มนัดหมาย");
+      setTimeout(() => {
+        router.push("/login");
+      }, 2000);
       return;
     }
-  
-    if (!selectedDate || !time) {
-      setError("กรุณาเลือกวันที่และเวลา");
+
+    if (!selectedDate || !/^\d{2}:\d{2}$/.test(time)) {
+      setError("กรุณาเลือกวันที่และระบุเวลาให้ถูกต้อง");
       return;
     }
-  
+
     try {
-      // รวมวันที่และเวลา
       const appointmentDate = new Date(selectedDate);
       const [hours, minutes] = time.split(":");
-      appointmentDate.setHours(Number(hours), Number(minutes), 0, 0); // ตั้งเวลา
-  
-      // แปลงเป็นเวลาท้องถิ่นของประเทศไทย
+      appointmentDate.setHours(Number(hours), Number(minutes), 0, 0);
+
       const localDate = new Intl.DateTimeFormat("en-CA", {
         timeZone: "Asia/Bangkok",
         year: "numeric",
         month: "2-digit",
         day: "2-digit",
       }).format(appointmentDate);
-  
+
       const localTime = appointmentDate.toLocaleTimeString("en-GB", {
         timeZone: "Asia/Bangkok",
         hour12: false,
         hour: "2-digit",
         minute: "2-digit",
       });
-  
+
       const res = await fetch("/api/auth/appointments", {
         method: "POST",
         headers: {
@@ -69,15 +70,15 @@ const AddAppointmentPage = () => {
         },
         body: JSON.stringify({
           ...newAppointment,
-          date: localDate, // วันที่แบบไทย
-          time: localTime, // เวลาแบบไทย
+          date: localDate,
+          time: localTime,
         }),
       });
-  
+
       if (!res.ok) {
         throw new Error("Failed to add appointment");
       }
-  
+
       setSuccess(true);
       setTimeout(() => {
         router.push("/dashboard/appointments");
@@ -86,7 +87,6 @@ const AddAppointmentPage = () => {
       setError("ไม่สามารถเพิ่มการนัดหมายได้");
     }
   };
-  
 
   return (
     <div>
@@ -97,7 +97,6 @@ const AddAppointmentPage = () => {
         {success && (
           <div className={styles.successPopup}>
             <span className={styles.successIcon}>✔</span>
-            
             <p>บันทึกข้อมูลสำเร็จ!</p>
           </div>
         )}
@@ -120,7 +119,7 @@ const AddAppointmentPage = () => {
           </div>
           <div>
             <label>วันที่:</label>
-            <Calendar onChange={setSelectedDate} value={selectedDate} />
+            <Calendar locale="th" onChange={setSelectedDate} value={selectedDate} />
           </div>
           <div>
             <label>เวลา:</label>
@@ -141,9 +140,13 @@ const AddAppointmentPage = () => {
               required
             />
           </div>
-          <a href="/dashboard/appointments/" className="back">
+          <button
+            type="button"
+            className="back"
+            onClick={() => router.push("/dashboard/appointments/")}
+          >
             กลับไปยังหน้ารายการการนัดหมาย
-          </a>
+          </button>
           <button className={styles.submit} type="submit">บันทึกการนัดหมาย</button>
         </form>
       </div>

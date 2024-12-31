@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import Navbar from '@/navbar';
+import Navbar from '@/navbar1';
 import LoginPageModal from './loginmodal/page'; // Import LoginPageModal component
 import styles from './HomePage.module.css';
 

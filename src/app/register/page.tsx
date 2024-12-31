@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Navbar from '@/navbar'; // นำเข้า Navbar component
+import Navbar from '@/navbar1'; // นำเข้า Navbar component
 import styles from './RegisterPage.module.css';
 
 const RegisterPage = () => {

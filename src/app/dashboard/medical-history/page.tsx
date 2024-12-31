@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from 'react';
-import Navbar from '@/navbar';  // Import Navbar
+import Navbar from '@/navbar1';  // Import Navbar
 import styles from './HistoryPage.module.css';  // Import CSS สำหรับหน้า History Page
 
 interface HistoryItem {
